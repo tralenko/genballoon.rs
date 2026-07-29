@@ -104,7 +104,9 @@ async function loadFiles() {
 
       <div class="p-price-box">
         <div class="p-price-ammount-box">
-          <p>$${item.price}</p>
+          <div class="p-price-ammount-box">
+            <p>${item.price} din</p>
+          </div>
         </div>
       </div>
 
