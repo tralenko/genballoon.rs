@@ -39,7 +39,7 @@ async function loadCourses() {
 
       <div class="price-box">
         <div class="price-ammount-box">
-          <p>$${item.price}</p>
+          <p>${item.price} din</p>
         </div>
       </div>
 
