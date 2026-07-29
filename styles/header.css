@@ -186,16 +186,6 @@ header{
   height: 23px;
 }
 
-.menu-button-education {
-  row-gap: 4px;
-  width: 65px;
-  margin-bottom: 3px;
-}
-
-.education-icon img{
-  height:30px;
-}
-
 .menu-button{
     position: relative;
     overflow: visible;
