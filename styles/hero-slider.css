@@ -1,0 +1,209 @@
+.hero-slider-section{
+
+    width:93%;
+    max-width:1500px;
+
+    margin:105px auto 40px;
+
+}
+
+.hero-slider{
+
+    position:relative;
+
+    overflow:hidden;
+
+    border-radius:28px;
+
+    border:1px solid rgb(226,226,226);
+
+    background:white;
+
+    box-shadow:
+    0 12px 35px rgba(0,0,0,.08);
+
+}
+
+.hero-slide{
+
+    display:none;
+    width:100%;
+
+    animation:fade .45s;
+
+}
+
+.hero-slide.active{
+
+    display:block;
+
+}
+
+.hero-slide img{
+
+    width:100%;
+    display:block;
+
+    aspect-ratio:16/6;
+
+    object-fit:cover;
+
+}
+
+.hero-prev,
+.hero-next{
+
+    position:absolute;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    width:46px;
+    height:46px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.92);
+
+    backdrop-filter:blur(8px);
+
+    cursor:pointer;
+
+    font-size:24px;
+
+    transition:.25s;
+
+    box-shadow:0 6px 18px rgba(0,0,0,.15);
+
+}
+
+.hero-prev:hover,
+.hero-next:hover{
+
+    transform:translateY(-50%) scale(1.08);
+
+}
+
+.hero-prev{
+
+    left:20px;
+
+}
+
+.hero-next{
+
+    right:20px;
+
+}
+
+.hero-dots{
+
+    position:absolute;
+
+    bottom:18px;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    display:flex;
+
+    gap:10px;
+
+}
+
+.hero-dot{
+
+    width:10px;
+    height:10px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.65);
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.hero-dot.active{
+
+    width:34px;
+
+    border-radius:999px;
+
+    background:white;
+
+}
+
+@keyframes fade{
+
+    from{
+
+        opacity:.35;
+
+    }
+
+    to{
+
+        opacity:1;
+
+    }
+
+}
+
+@media(max-width:900px){
+
+.hero-slider-section{
+
+    width:95%;
+
+    margin:75px auto 25px;
+
+}
+
+.hero-slider{
+
+    border-radius:22px;
+
+}
+
+.hero-slide img{
+
+    aspect-ratio:1/1;
+
+}
+
+.hero-prev,
+.hero-next{
+
+    width:38px;
+    height:38px;
+
+    font-size:20px;
+
+}
+
+.hero-prev{
+
+    left:10px;
+
+}
+
+.hero-next{
+
+    right:10px;
+
+}
+
+.hero-dots{
+
+    bottom:12px;
+
+}
+
+}
