@@ -352,15 +352,31 @@ header{
   .menu-buttons-row {
     position: fixed;
     left: -95px;
-    top: 0;
+    top: 55px;                 /* начинается под хедером */
+
     width: 90px;
-    height: 100dvh;
-    display: block;
-    padding: 90px 4px 20px 8px;
-    background-color: white;
+    height: calc(100dvh - 55px); /* занимает оставшуюся высоту */
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
+    padding: 20px 4px 20px 8px; /* уменьшили верхний padding */
+
+    background: #fff;
+
+    border: 1px solid rgb(238,238,238);
+    border-left: none;
+
+    border-radius: 0 20px 20px 0;
+
+    box-shadow: 4px 0 15px rgba(0,0,0,.05);
+
     transition: transform .5s;
-    border: none; /* Сбрасываем все старые границы */
-    border-right: 1px solid rgba(0, 0, 0, 0.1); /* Тонкая, едва заметная линия справа */
+
+    z-index: 1100;
+}
   
   /* Закругляем только правые углы */
     border-radius: 0 20px 20px 0; 
