@@ -1,0 +1,429 @@
+header{
+  height: 78px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+
+  padding:0 22px;
+
+  z-index:1000;
+
+  background:rgba(255,255,255,0.85);
+  backdrop-filter:blur(12px);
+
+  border-bottom:1px solid rgba(0,0,0,0.06);
+
+  box-shadow:0 10px 30px rgba(0,0,0,0.04);
+}
+
+.header-burger-btn {
+  display: none;
+  position: relative;
+  width: 100px;
+  height: 44px;
+  border: none;
+  background: transparent;
+  margin-left: 0px;
+  z-index: 1101;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.header-burger-btn span {
+  position: absolute;
+  width: 24px;
+  height: 3px;
+  border-radius: 999px;
+  background: #111;
+
+  left: 10px;
+  top: 20px;
+
+  transition: transform .35s ease,
+              opacity .35s ease,
+              background-color .35s ease;
+}
+
+.header-burger-btn span:nth-child(1){
+  transform: translateY(-7px);
+}
+
+.header-burger-btn span:nth-child(2){
+  transform: translateY(0);
+}
+
+.header-burger-btn span:nth-child(3){
+  transform: translateY(7px);
+}
+
+.header-burger-btn span:nth-child(1){
+  transform: translateY(-8px);
+}
+
+.header-burger-btn span:nth-child(2){
+  transform: translateY(0);
+}
+
+.header-burger-btn span:nth-child(3){
+  transform: translateY(8px);
+}
+
+.header.open .header-burger-btn span {
+  background-color: rgb(127, 0, 0);
+}
+
+.header.open .header-burger-btn span:nth-child(1){
+  transform: translateY(0) rotate(45deg);
+}
+
+.header.open .header-burger-btn span:nth-child(2){
+  opacity: 0;
+}
+
+.header.open .header-burger-btn span:nth-child(3){
+  transform: translateY(0) rotate(-45deg);
+}
+
+.logo {
+  width: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+
+  user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+.logo-txt {
+  width: 52px;
+  height: 28px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 24px;
+  font-weight: 500;
+
+  border-radius: 4px;
+}
+
+
+.logo-txt {
+  margin-top: 1px;
+}
+
+.confetti {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  pointer-events: none;
+  z-index: 9999;
+  animation: confettiFly 1.5s ease-out forwards;
+}
+
+@keyframes confettiFly {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(var(--x), var(--y)) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+.logo-icon {
+  height: 30px;
+}
+
+.logo-img {
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.menu-buttons-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-left: 0px;
+  align-items: center;
+}
+
+.menu-button-box {
+  max-width: 70px;
+}
+
+.menu-button {
+  font-size: 9px;
+  font-weight: 700;
+  display: flex;
+  flex-direction: column;
+  row-gap: 7px;
+  align-items: center;
+  justify-content: center;
+  width: 65px;
+  height: 45px;
+  background: transparent;
+  border-width: 0;
+  margin-left: 12px;
+  margin-right: 12px;
+  transition:0.5s;
+  cursor: pointer;
+}
+
+.menu-button img{
+  height: 23px;
+}
+
+.menu-button-education {
+  row-gap: 4px;
+  width: 65px;
+  margin-bottom: 3px;
+}
+
+.education-icon img{
+  height:30px;
+}
+
+.menu-button{
+    position: relative;
+    overflow: visible;
+    transition: color .3s ease;
+}
+
+.menu-button::after{
+    content: "";
+    position: absolute;
+    left: 8px;
+    bottom: -6px;
+
+    width: calc(100% - 16px);
+    height: 4px;
+
+    background: rgb(36, 71, 174);
+    border-radius: 999px;
+
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .35s ease;
+}
+
+.menu-button:hover::after{
+    transform: scaleX(1);
+}
+
+.menu-button.active::after{
+    transform: scaleX(1);
+}
+
+.menu-button.active{
+    cursor: default;
+}
+
+.cart {
+  width: 250px;
+  text-align: start;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  column-gap: 10px;
+}
+
+.profile a{
+  text-decoration: none;
+}
+
+.cart-button{
+
+    width:auto;
+    height:46px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    gap:8px;
+
+    padding:0;
+
+    background:transparent;
+    border:none;
+    border-radius:0;
+
+    cursor:pointer;
+}
+
+.cart-button img{
+
+    height:20px;
+}
+
+.cart-badge{
+
+    display:none;
+
+    position:static;
+    order:-1;
+
+    min-width:auto;
+    height:auto;
+
+    padding:0;
+
+    background:none;
+    border:none;
+
+    color:#111;
+
+    font-size:22px;
+    font-weight:500;
+
+    line-height:1;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+
+@media (max-width: 900px) {
+  .menu-button::after{
+    left: 0px;
+    top: 50%;
+    bottom: auto;
+
+    width: 4px;
+    height: 70%;
+
+    transform: translateY(-50%) scaleY(0);
+    transform-origin: center;
+  }
+
+  .menu-button:hover::after{
+    transform: translateY(-50%) scaleY(1);
+  }
+
+  .menu-button.active::after{
+    transform: translateY(-50%) scaleY(1);
+  }
+
+  header {
+    height: 55px;
+  }
+
+  .logo-txt {
+    font-weight: 500;
+  }
+
+  .logo-icon {
+    height: 30px;
+  }
+
+  .page-name {
+    font-size: 25px;
+  }
+
+  .header-burger-btn {
+    display: block;
+  }
+
+  .profile-button {
+    height: 40px;
+    width: 40px;
+    border-radius: 10px;
+  }
+
+  .menu-button{
+    margin:0;
+  }
+
+  .menu-buttons-row {
+    position: fixed;
+    left: -95px;
+    top: 0;
+    width: 90px;
+    height: 100dvh;
+    display: block;
+    padding: 90px 4px 20px 8px;
+    background-color: white;
+    transition: transform .5s;
+    border: none; /* Сбрасываем все старые границы */
+    border-right: 1px solid rgba(0, 0, 0, 0.1); /* Тонкая, едва заметная линия справа */
+  
+  /* Закругляем только правые углы */
+    border-radius: 0 20px 20px 0; 
+  
+  /* Добавляем мягкую тень для объема */
+    box-shadow: 4px 0 15px rgba(0, 0, 0, 0.05);
+
+    display: flex;   /* Включаем flex для выравнивания содержимого */
+    flex-direction: column; /* Элементы в колонку */
+    align-items: center;    /* Центрируем элементы по горизонтали */
+    justify-content: flex-start;
+    border-width: 2px;
+    border-style: solid;
+    border-color: rgb(238, 238, 238);
+
+    z-index: 1100;
+  }
+
+  .menu-button-box{
+    width:100%;
+    max-width:none;
+
+    display:flex;
+    justify-content:center;
+
+    margin-top:15px;
+    margin-left:0;
+}
+
+  .header.open .menu-buttons-row{
+    transform: translateX(100%);
+  }
+
+.menu-button img{
+  height: 28px;
+}
+}
+
+@media (max-width:900px){
+
+    .cart{
+
+        width:100px;
+
+        justify-content:flex-end;
+
+        padding-right:20px; /* правее */
+
+    }
+
+    .cart-button{
+
+        gap:8px;
+    }
+
+    .cart-button img{
+
+        height:20px;
+    }
+
+    .cart-badge{
+
+        font-size:22px;
+    }
+
+}

@@ -1,0 +1,38 @@
+*{
+  box-sizing:border-box;
+}
+
+html{
+  overflow-x:hidden;
+}
+
+html {
+  scrollbar-gutter: stable; 
+  touch-action: manipulation
+}
+
+body {
+  font-family: Roboto, arial;
+  margin-top: 0px;
+  background:#f7f9fc;
+
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+html, body {
+  height: 100%;
+}
+
+
+section, main {
+  flex: 1;
+}
+
+.catalog-name {
+  font-size: 21px;
+  font-weight: 500;
+  width: 93%;
+  max-width: 1500px;
+  margin-left: 5%;
+}
