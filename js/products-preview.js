@@ -64,7 +64,15 @@ document.addEventListener("DOMContentLoaded", async () => {
             </button>
 
             <div class="home-product-price">
-                <p>${product.price} din</p>
+
+                <span class="price-number">
+                    ${product.price}
+                </span>
+            
+                <span class="price-currency">
+                    din
+                </span>
+            
             </div>
         `;
 
