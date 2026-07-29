@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             </button>
 
             <div class="home-product-price">
-                <p>$${product.price}</p>
+                <p>${product.price} din</p>
             </div>
         `;
 
