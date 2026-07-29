@@ -320,7 +320,8 @@ header{
   }
 
   header {
-    height: 55px;
+    height:68px;
+    padding:0 16px;
   }
 
   .logo-txt {
