@@ -1,10 +1,5 @@
 .hero-slider-section{
-
-    width:93%;
-    max-width:1500px;
-
-    margin:105px auto 40px;
-
+    display: none;
 }
 
 .hero-slider{
@@ -156,12 +151,13 @@
 
 }
 
-@media(max-width:900px){
+@media (max-width: 900px){
 
 .hero-slider-section{
 
-    width:95%;
+    display: block;
 
+    width:95%;
     margin:75px auto 25px;
 
 }
@@ -203,6 +199,10 @@
 .hero-dots{
 
     bottom:12px;
+
+}
+
+}
 
 }
 
