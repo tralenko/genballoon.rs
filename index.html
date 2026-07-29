@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>GenSpace</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet">
+    <link rel="stylesheet" href="styles/header.css">
+    <link rel="stylesheet" href="styles/general.css">
+    <link rel="stylesheet" href="styles/ad-style.css">
+    <link rel="stylesheet" href="styles/footer.css">
+    <link rel="stylesheet" href="styles/course.css">
+
+    <link rel="stylesheet" href="styles/hero-block.css">
+    <link rel="stylesheet" href="styles/update.css">
+    <link rel="stylesheet" href="styles/product.css">
+    <link rel="stylesheet" href="styles/index.css">
+    <link rel="stylesheet" href="styles/showcase-test.css">
+    <link rel="stylesheet" href="styles/dividing-line.css">
+    <link rel="stylesheet" href="styles/course-areas.css">
+
+    <link rel="stylesheet" href="styles/products-preview.css">
+
+    <script defer src="js/header.js"></script>
+    <script defer src="js/confetti.js"></script>
+    <script defer src="js/cart.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase.js"></script>
+    <script defer src="js/home-products.js"></script>
+
+    <script defer src="js/auth-menu.js"></script>
+    <script defer src="js/products-preview.js"></script>
+  </head>
+  <body>
+    <header class="header">
+      <button class="header-burger-btn" id="burger">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="logo" id="logo">
+        <div>
+          <div class="logo-txt">
+            <p><span>GEN</span>BALLOON</p>
+          </div>
+        </div>
+      </div>
+      <div class="menu-buttons-row">
+        <div class="menu-button-box">
+          <button class="menu-button" active onclick="window.location.href='index.html';">
+            <img src="icons/home.png">
+            HOME
+          </button>
+        </div>
+        <div class="menu-button-box">
+          <button class="menu-button" onclick="window.location.href='product-catalog.html';">
+            <img src="icons/shop.png">
+            SHOP
+          </button>
+      </div>
+      <div class="menu-button-box education-icon">
+          <button class="menu-button menu-button-education" onclick="window.location.href='course-catalog.html';">
+            <img src="icons/education.webp">
+            COURSES
+          </button>
+        </div>
+        <div class="menu-button-box">
+          <button class="menu-button" onclick="window.location.href='lessons-catalog.html';">
+            <img src="icons/courses.png">
+            LESSONS
+          </button>
+        </div>
+        <div class="menu-button-box" onclick="window.location.href='support.html';">
+          <button class="menu-button">
+            <img src="icons/support.png">
+            SUPPORT
+          </button>
+        </div>
+        <div class="menu-button-box">
+            <button class="menu-button" id="auth-menu-button">
+                <img id="auth-menu-icon" src="icons/log in.png">
+                <span id="auth-menu-text">LOG IN</span>
+            </button>
+        </div>
+      </div>
+      <div class="cart">
+        <button class="cart-button" onclick="window.location.href='cart.html'">
+          <img src="icons/cart-2.png">
+          <span class="cart-badge">0</span>
+        </button>
+      </div>
+    </header>
+
+  <section class="showcase-section">
+  
+    <div class="showcase-left">
+  
+      <span class="showcase-badge">
+        New Experience
+      </span>
+  
+      <h2>
+        Learn Balloon design professionally
+      </h2>
+  
+      <p>
+        Generate unique balloon creations, customize colors,
+        add effects and download high-quality assets instantly.
+      </p>
+
+      <div class="students">
+
+          <div class="student-avatars">
+
+            <img src="https://i.pravatar.cc/100?img=1" alt="">
+            <img src="https://i.pravatar.cc/100?img=2" alt="">
+            <img src="https://i.pravatar.cc/100?img=3" alt="">
+            <img src="https://i.pravatar.cc/100?img=4" alt="">
+
+          </div>
+
+          <div class="student-info">
+            <h4>1200+ students</h4>
+            <p>already trust our courses</p>
+          </div>
+
+        </div>
+  
+      <div class="showcase-buttons">
+        <button class="showcase-primary">
+          Explore Courses
+        </button>
+  
+        <button class="showcase-secondary">
+          Digital Goods
+        </button>
+      </div>
+
+    </div>
+  
+    <div class="showcase-right">
+  
+      <div class="showcase-video-box">
+  
+        <video autoplay muted loop playsinline class="showcase-video">
+  
+          <source src="videos/balloons-demo.mp4" type="video/mp4">
+  
+        </video>
+  
+      </div>
+  
+    </div>
+  
+  </section>
+
+  <section class="dividing line">
+    <div class="wave-divider">
+  <svg viewBox="0 0 1200 80" preserveAspectRatio="none">
+    <path
+      d="M20 40
+         C300 5, 900 75, 1180 40"
+      class="wave-line"
+    />
+  </svg>
+</div>
+  </section>
+
+  <div class="topic">
+    <p>Course Areas</p>
+  </div>
+
+  <section class="course-areas">
+
+  <div class="course-area-card">
+
+    <div class="course-area-image">
+      <img src="/mosaic.webp" alt="Mosaic Frames">
+    </div>
+
+    <div class="course-area-content">
+
+      <span class="course-tag">
+        Professional Course
+      </span>
+
+      <h3>Mosaic Frames</h3>
+
+      <p>
+        Learn how to create professional mosaic balloon frames for
+        birthdays, weddings, corporate events and luxury decorations.
+      </p>
+
+      <div class="certificate-card">
+
+        <div class="certificate-icon">
+          ✓
+        </div>
+
+        <div>
+          <strong>Professional Certificate</strong>
+          <p>Suitable for LinkedIn profile</p>
+        </div>
+
+      </div>
+
+      <button class="showcase-primary" onclick="location.href='course.html?slug=mosaic-frames'">
+          Learn More
+      </button>
+
+    </div>
+
+    
+
+  </div>
+
+  <div class="course-area-card">
+
+    <div class="course-area-image">
+      <img src="/bobo.webp" alt="Bobo Balloons">
+    </div>
+
+    <div class="course-area-content">
+
+      <span class="course-tag">
+        Professional Course
+      </span>
+
+      <h3>Bobo Balloons</h3>
+
+      <p>
+        Master transparent Bobo balloon decorations, lighting effects
+        and premium event installations.
+      </p>
+
+      <div class="certificate-card">
+
+        <div class="certificate-icon">
+          ✓
+        </div>
+
+        <div>
+          <strong>Professional Certificate</strong>
+          <p>Suitable for LinkedIn profile</p>
+        </div>
+
+      </div>
+
+      <button class="showcase-primary">
+        Learn More
+      </button>
+
+    </div>
+
+  </div>
+
+  <div class="course-area-card">
+
+    <div class="course-area-image">
+      <img src="/balloon-design.webp" alt="Balloon Art">
+    </div>
+
+    <div class="course-area-content">
+
+      <span class="course-tag">
+        Professional Course
+      </span>
+
+      <h3>Balloon Art</h3>
+
+      <p>
+        Create stunning balloon sculptures, figures and artistic
+        installations for events and exhibitions.
+      </p>
+
+      <div class="certificate-card">
+
+        <div class="certificate-icon">
+          ✓
+        </div>
+
+        <div>
+          <strong>Professional Certificate</strong>
+          <p>Suitable for LinkedIn profile</p>
+        </div>
+
+      </div>
+
+      <button class="showcase-primary">
+        Learn More
+      </button>
+
+    </div>
+
+  </div>
+
+  <div class="course-area-card">
+
+    <div class="course-area-image">
+      <img src="/digital.webp" alt="Digital Products">
+    </div>
+
+    <div class="course-area-content">
+
+      <span class="course-tag">
+        Professional Course
+      </span>
+
+      <h3>Digital Products Creation</h3>
+
+      <p>
+        Learn to create templates, guides, PDFs and digital products
+        for balloon professionals.
+      </p>
+
+      <div class="certificate-card">
+
+        <div class="certificate-icon">
+          ✓
+        </div>
+
+        <div>
+          <strong>Professional Certificate</strong>
+          <p>Suitable for LinkedIn profile</p>
+        </div>
+
+      </div>
+
+      <button class="showcase-primary">
+        Learn More
+      </button>
+
+    </div>
+
+  </div>
+
+  <div class="course-area-card">
+
+    <div class="course-area-image">
+      <img src="/tool.webp" alt="Tools & Equipment">
+    </div>
+
+    <div class="course-area-content">
+
+      <span class="course-tag">
+        Professional Course
+      </span>
+
+      <h3>Tools & Equipment</h3>
+
+      <p>
+        Understand professional tools, inflation systems and equipment
+        used by successful balloon decorators.
+      </p>
+
+      <div class="certificate-card">
+
+        <div class="certificate-icon">
+          ✓
+        </div>
+
+        <div>
+          <strong>Professional Certificate</strong>
+          <p>Suitable for LinkedIn profile</p>
+        </div>
+
+      </div>
+
+      <button class="showcase-primary">
+        Learn More
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+<div class="home-products-section">
+
+    <div class="home-products-header">
+        <div>
+            <h2 class="home-products-title">Digital Goods</h2>
+            <p class="home-products-subtitle">
+                Ready-to-use templates, designs and digital products.
+            </p>
+        </div>
+    </div>
+
+    <div class="home-products-row" id="home-products-row"></div>
+
+</div>
+
+  <section class="updates-section">
+
+  <div class="updates-container">
+
+    <div class="updates-left">
+
+      <!--<div class="updates-badge">
+        🔥 Latest Updates
+      </div>-->
+
+      <h2 class="updates-title">
+        Stay Updated With Our
+        <span>Latest Releases</span>
+      </h2>
+    </div>
+
+    <div class="updates-right">
+
+      <div class="update-card">
+        <div class="update-tag">NEW COURSE</div>
+        <h3>Luxury Balloon Installations</h3>
+        <p>Master premium event decorations with step-by-step guidance.</p>
+      </div>
+
+      <div class="update-card">
+        <div class="update-tag">NEW TEMPLATE</div>
+        <h3>Printable Design Pack</h3>
+        <p>Professional PDF resources ready for instant download.</p>
+      </div>
+
+      <div class="update-card">
+        <div class="update-tag">COMING SOON</div>
+        <h3>Business Growth Academy</h3>
+        <p>Learn pricing, marketing and client acquisition strategies.</p>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+    <footer class="footer">
+    
+      <!-- TOP -->
+      <div class="footer-top">
+    
+        <!-- Brand -->
+        <div class="footer-brand">
+            <span class="footer-logo-word">GENBALLOON LTD</span>
+          </a>
+          <p>Step-by-step balloon tutorials and digital courses for decorators of all levels.</p>
+    
+          <!-- Social -->
+          <div class="social-row">
+            <a href="#" class="social-btn" aria-label="TikTok">
+              <svg viewBox="0 0 24 24" width="18" height="18">
+                <path fill="currentColor"
+                  d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.2 8.2 0 0 0 4.79 1.52V6.76a4.85 4.85 0 0 1-1.02-.07z" />
+              </svg>
+            </a>
+            <a href="#" class="social-btn" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                <circle cx="12" cy="12" r="4" />
+                <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none" />
+              </svg>
+            </a>
+            <a href="#" class="social-btn" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" width="18" height="18">
+                <path fill="currentColor" d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+              </svg>
+            </a>
+            <a href="#" class="social-btn" aria-label="YouTube">
+              <svg viewBox="0 0 24 24" width="18" height="18">
+                <path fill="currentColor"
+                  d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z" />
+                <polygon fill="#fff" points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" />
+              </svg>
+            </a>
+          </div>
+    
+        </div>
+    
+        <!-- Services -->
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="#">Courses</a></li>
+            <li><a href="#">Digital goods</a></li>
+            <li><a href="#">Merch <span class="badge-new">new</span></a></li>
+            <li><a href="#">Subscription</a></li>
+          </ul>
+        </div>
+    
+        <!-- Company -->
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#">About us</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Affiliates</a></li>
+            <li><a href="#">Press</a></li>
+          </ul>
+        </div>
+    
+        <!-- Support -->
+        <div class="footer-col">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Shipping & delivery</a></li>
+            <li><a href="#">Returns</a></li>
+          </ul>
+        </div>
+    
+      </div><!-- /footer-top -->
+    
+      <!-- TRUST BAR -->
+      <div class="footer-trust">
+        <span class="trust-label">Why shop with us</span>
+        <div class="trust-pills">
+          <div class="trust-pill">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            </svg>
+            Secure checkout
+          </div>
+          <div class="trust-pill">
+            <svg viewBox="0 0 24 24">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+            Instant digital access
+          </div>
+          <div class="trust-pill">
+            <svg viewBox="0 0 24 24">
+              <polyline points="20 12 20 22 4 22 4 12" />
+              <rect x="2" y="7" width="20" height="5" />
+              <path d="M12 22V7" />
+              <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z" />
+              <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z" />
+            </svg>
+            Free gift included
+          </div>
+          <div class="trust-pill">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.29h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.92z" />
+            </svg>
+            Friendly support
+          </div>
+        </div>
+      </div>
+    
+      <!-- BOTTOM -->
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2026 Genballoon Ltd. All rights reserved.</span>
+        <nav class="footer-legal" aria-label="Legal links">
+          <a href="#">Privacy policy</a>
+          <a href="#">Terms of use</a>
+          <a href="#">Cookie settings</a>
+        </nav>
+      </div>
+    
+    </footer>
+
+    
+
+  </body>
+</html>
