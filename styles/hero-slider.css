@@ -98,17 +98,15 @@
 
 .hero-dots{
 
-    position:absolute;
-
-    bottom:18px;
-
-    left:50%;
-
-    transform:translateX(-50%);
-
     display:flex;
 
+    justify-content:center;
+
+    align-items:center;
+
     gap:10px;
+
+    margin-top:18px;
 
 }
 
@@ -119,7 +117,7 @@
 
     border-radius:50%;
 
-    background:rgba(255,255,255,.65);
+    background:#cfcfcf;
 
     cursor:pointer;
 
@@ -133,7 +131,7 @@
 
     border-radius:999px;
 
-    background:white;
+    background:#111;
 
 }
 
@@ -200,7 +198,7 @@
 
 .hero-dots{
 
-    bottom:12px;
+    margin-top:14px;
 
 }
 
