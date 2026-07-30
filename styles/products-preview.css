@@ -20,18 +20,6 @@
 
 }
 
-.home-products-section{
-    width:93%;
-    margin:90px auto 40px;
-}
-
-.home-products-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:24px;
-}
-
 .home-products-title{
     font-size:30px;
     font-weight:600;
