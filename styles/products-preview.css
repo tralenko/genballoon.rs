@@ -1,6 +1,24 @@
 /* ==========================================
    HOME DIGITAL GOODS
 ========================================== */
+.home-section-header{
+
+    width:93%;
+    max-width:1500px;
+
+    margin:0 auto 18px;
+
+}
+
+.home-section-header h2{
+
+    margin:0;
+
+    font-size:28px;
+
+    font-weight:700;
+
+}
 
 .home-products-section{
     width:93%;
