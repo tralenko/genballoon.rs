@@ -1,293 +1,324 @@
-document.addEventListener("DOMContentLoaded",()=>{
+document.addEventListener("DOMContentLoaded", () => {
 
 
-const slider = document.querySelector(".hero-slider");
+    const slider = document.querySelector(".hero-slider");
 
-if(!slider) return;
-
-
-const slides = Array.from(
-    slider.querySelectorAll(".hero-slide")
-);
+    if (!slider) return;
 
 
-const prevBtn = slider.querySelector(".hero-prev");
-const nextBtn = slider.querySelector(".hero-next");
-
-const dotsBox = document.querySelector(".hero-dots");
+    slider.style.visibility = "hidden";
 
 
-
-/*
-    создаём track автоматически
-*/
-
-
-const track = document.createElement("div");
-
-track.className = "hero-track";
-
-
-
-slides.forEach(slide=>{
-
-    track.appendChild(slide);
-
-});
-
-
-slider.insertBefore(
-    track,
-    prevBtn
-);
-
-
-
-let current = 0;
-
-
-
-function getVisibleCount(){
-
-    if(window.innerWidth <= 900){
-
-        return 1;
-
-    }
-
-    if(window.innerWidth <= 1200){
-
-        return 2;
-
-    }
-
-    return 3;
-
-}
-
-
-
-
-function updateSlider(){
-
-
-    const visible = getVisibleCount();
-
-
-    const slideWidth =
-    slides[0].getBoundingClientRect().width;
-
-
-    const gap =
-    parseInt(
-        getComputedStyle(track).gap
-    ) || 0;
-
-
-
-    const offset =
-    current * (slideWidth + gap);
-
-
-
-    track.style.transform =
-    `translateX(-${offset}px)`;
-
-
-    updateDots();
-
-}
-
-
-
-
-function maxIndex(){
-
-    return Math.max(
-        0,
-        slides.length - getVisibleCount()
+    const slides = Array.from(
+        slider.querySelectorAll(".hero-slide")
     );
 
-}
 
+    const dotsBox = document.querySelector(".hero-dots");
 
 
+    if (!slides.length) return;
 
-function nextSlide(){
 
 
-    current++;
+    /*
+        создаём track
+    */
 
+    const track = document.createElement("div");
 
-    if(current > maxIndex()){
+    track.className = "hero-track";
 
-        current = 0;
 
-    }
+    slides.forEach(slide => {
 
+        slide.style.display = "block";
 
-    updateSlider();
-
-}
-
-
-
-
-function prevSlide(){
-
-
-    current--;
-
-
-    if(current < 0){
-
-        current = maxIndex();
-
-    }
-
-
-    updateSlider();
-
-}
-
-
-
-
-if(nextBtn){
-
-    nextBtn.onclick = nextSlide;
-
-}
-
-
-if(prevBtn){
-
-    prevBtn.onclick = prevSlide;
-
-}
-
-
-
-
-/*
-    точки
-*/
-
-
-function createDots(){
-
-
-    if(!dotsBox) return;
-
-
-    dotsBox.innerHTML="";
-
-
-    slides.forEach((_,i)=>{
-
-
-        const dot =
-        document.createElement("div");
-
-
-        dot.className="hero-dot";
-
-
-        dot.onclick=()=>{
-
-
-            current=i;
-
-
-            if(current>maxIndex()){
-
-                current=maxIndex();
-
-            }
-
-
-            updateSlider();
-
-
-        };
-
-
-        dotsBox.appendChild(dot);
-
+        track.appendChild(slide);
 
     });
 
 
-}
-
-
-
-
-function updateDots(){
-
-
-    if(!dotsBox) return;
-
-
-    const dots =
-    dotsBox.querySelectorAll(".hero-dot");
-
-
-    dots.forEach(dot=>
-        dot.classList.remove("active")
+    slider.insertBefore(
+        track,
+        slider.firstChild
     );
 
 
-    if(dots[current]){
 
-        dots[current].classList.add("active");
-
-    }
-
-
-}
+    let current = 0;
 
 
 
-createDots();
+    function getVisibleCount(){
 
 
-updateSlider();
+        if(window.innerWidth <= 900){
+
+            return 1;
+
+        }
 
 
+        if(window.innerWidth <= 1200){
+
+            return 2;
+
+        }
 
 
-/*
-    авто листание
-*/
-
-
-setInterval(()=>{
-
-    nextSlide();
-
-},5000);
-
-
-
-
-
-window.addEventListener(
-"resize",
-()=>{
-
-
-    if(current > maxIndex()){
-
-        current=maxIndex();
+        return 3;
 
     }
 
 
-    updateSlider();
 
 
-});
+    function getMaxIndex(){
+
+
+        return Math.max(
+            0,
+            slides.length - getVisibleCount()
+        );
+
+
+    }
+
+
+
+
+    function updateSlider(){
+
+
+        const visible = getVisibleCount();
+
+
+        const slideWidth =
+            slides[0].offsetWidth;
+
+
+        const gap =
+            parseInt(
+                window.getComputedStyle(track).gap
+            ) || 0;
+
+
+
+        const move =
+            current * (slideWidth + gap);
+
+
+
+        track.style.transform =
+            `translateX(-${move}px)`;
+
+
+        updateDots();
+
+
+    }
+
+
+
+
+
+    function nextSlide(){
+
+
+        current++;
+
+
+        if(current > getMaxIndex()){
+
+
+            current = 0;
+
+
+        }
+
+
+        updateSlider();
+
+
+    }
+
+
+
+
+
+    function prevSlide(){
+
+
+        current--;
+
+
+        if(current < 0){
+
+
+            current = getMaxIndex();
+
+
+        }
+
+
+        updateSlider();
+
+
+    }
+
+
+
+
+
+
+    /*
+        создаём точки
+    */
+
+
+    function createDots(){
+
+
+        if(!dotsBox) return;
+
+
+        dotsBox.innerHTML="";
+
+
+
+        slides.forEach((slide,index)=>{
+
+
+            const dot =
+            document.createElement("div");
+
+
+            dot.className="hero-dot";
+
+
+
+            dot.onclick = ()=>{
+
+
+                current = Math.min(
+                    index,
+                    getMaxIndex()
+                );
+
+
+                updateSlider();
+
+
+            };
+
+
+
+            dotsBox.appendChild(dot);
+
+
+        });
+
+
+    }
+
+
+
+
+
+    function updateDots(){
+
+
+        if(!dotsBox) return;
+
+
+        const dots =
+            dotsBox.querySelectorAll(".hero-dot");
+
+
+
+        dots.forEach(dot=>{
+
+            dot.classList.remove("active");
+
+        });
+
+
+
+        if(dots[current]){
+
+
+            dots[current].classList.add("active");
+
+
+        }
+
+
+    }
+
+
+
+
+
+    createDots();
+
+
+    /*
+       ждём размеры картинок
+    */
+
+    setTimeout(()=>{
+
+
+        updateSlider();
+
+
+        slider.style.visibility="visible";
+
+
+    },50);
+
+
+
+
+    /*
+        авто листание
+    */
+
+
+    setInterval(()=>{
+
+
+        nextSlide();
+
+
+    },5000);
+
+
+
+
+
+    /*
+        resize
+    */
+
+
+    window.addEventListener("resize",()=>{
+
+
+        if(current > getMaxIndex()){
+
+
+            current = getMaxIndex();
+
+
+        }
+
+
+        updateSlider();
+
+
+    });
 
 
 
