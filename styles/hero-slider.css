@@ -1,6 +1,18 @@
+/* ==========================================
+   HERO SLIDER
+========================================== */
+
+
 .hero-slider-section{
-    display: none;
+
+    width:93%;
+    max-width:1500px;
+
+    margin:100px auto 40px;
+
 }
+
+
 
 .hero-slider{
 
@@ -8,44 +20,58 @@
 
     overflow:hidden;
 
+}
+
+
+
+/* создаётся JS */
+
+.hero-track{
+
+    display:flex;
+
+    gap:22px;
+
+    transition:transform .45s ease;
+
+    will-change:transform;
+
+}
+
+
+
+.hero-slide{
+
+    flex:0 0 calc((100% - 44px) / 3);
+
+}
+
+
+
+.hero-slide img{
+
+    width:100%;
+
+    aspect-ratio:2 / 1;
+
+    object-fit:cover;
+
+    display:block;
+
     border-radius:28px;
 
     border:1px solid rgb(226,226,226);
 
     background:white;
 
-    box-shadow:
-    0 12px 35px rgba(0,0,0,.08);
-
-    aspect-ratio: 2 / 1;
-
 }
 
-.hero-slide{
 
-    display:none;
-    width:100%;
 
-    animation:fade .45s;
+/* =========================
+   BUTTONS
+========================= */
 
-}
-
-.hero-slide.active{
-
-    display:block;
-
-}
-
-.hero-slide img{
-
-    width:100%;
-    display:block;
-
-    aspect-ratio:16/6;
-
-    object-fit:cover;
-
-}
 
 .hero-prev,
 .hero-next{
@@ -57,44 +83,48 @@
     transform:translateY(-50%);
 
     width:46px;
+
     height:46px;
 
     border:none;
 
     border-radius:50%;
 
-    background:rgba(255,255,255,.92);
-
-    backdrop-filter:blur(8px);
+    background:white;
 
     cursor:pointer;
 
     font-size:24px;
 
-    transition:.25s;
+    z-index:5;
 
-    box-shadow:0 6px 18px rgba(0,0,0,.15);
-
-}
-
-.hero-prev:hover,
-.hero-next:hover{
-
-    transform:translateY(-50%) scale(1.08);
+    box-shadow:
+    0 6px 18px rgba(0,0,0,.15);
 
 }
+
+
 
 .hero-prev{
 
-    left:20px;
+    left:15px;
 
 }
+
+
 
 .hero-next{
 
-    right:20px;
+    right:15px;
 
 }
+
+
+
+/* =========================
+   DOTS
+========================= */
+
 
 .hero-dots{
 
@@ -102,28 +132,27 @@
 
     justify-content:center;
 
-    align-items:center;
-
     gap:10px;
 
     margin-top:18px;
 
 }
 
+
+
 .hero-dot{
 
     width:10px;
+
     height:10px;
 
     border-radius:50%;
 
     background:#cfcfcf;
 
-    cursor:pointer;
-
-    transition:.25s;
-
 }
+
+
 
 .hero-dot.active{
 
@@ -135,80 +164,75 @@
 
 }
 
-@keyframes fade{
 
-    from{
 
-        opacity:.35;
 
-    }
+/* =========================
+   LAPTOP
+========================= */
 
-    to{
 
-        opacity:1;
+@media(max-width:1200px){
 
-    }
+
+.hero-slide{
+
+    flex:0 0 calc((100% - 22px)/2);
 
 }
 
-@media (max-width: 900px){
+
+}
+
+
+
+/* =========================
+   MOBILE
+========================= */
+
+
+@media(max-width:900px){
+
 
 .hero-slider-section{
 
-    display: block;
-
     width:95%;
+
     margin:95px auto 25px;
 
 }
 
-.hero-slider{
 
-    border-radius:22px;
+
+.hero-track{
+
+    gap:0;
 
 }
+
+
+
+.hero-slide{
+
+    flex:0 0 100%;
+
+}
+
+
 
 .hero-slide img{
 
     aspect-ratio:2/1;
 
+    border-radius:22px;
+
+}
+
 }
 
 .hero-prev,
 .hero-next{
 
-    width:38px;
-    height:38px;
-
-    font-size:20px;
-
-}
-
-.hero-prev{
-
-    left:10px;
-
-}
-
-.hero-next{
-
-    right:10px;
-
-}
-
-.hero-dots{
-
-    margin-top:14px;
-
-}
-
-.hero-prev,
-    .hero-next{
-        display:none;
-    }
-
-}
-
-}
+    display:none;
 
 }
