@@ -20,11 +20,11 @@
 
     overflow:hidden;
 
+    width:100%;
+
 }
 
 
-
-/* создаётся JS */
 
 .hero-track{
 
@@ -35,6 +35,8 @@
     transition:transform .45s ease;
 
     will-change:transform;
+
+    align-items:flex-start;
 
 }
 
@@ -66,6 +68,149 @@
 
 }
 
+
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+
+.hero-prev,
+.hero-next{
+
+    display:none;
+
+}
+
+
+
+
+/* =========================
+   DOTS
+========================= */
+
+
+.hero-dots{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:10px;
+
+    margin-top:18px;
+
+}
+
+
+
+.hero-dot{
+
+    width:10px;
+
+    height:10px;
+
+    border-radius:50%;
+
+    background:#cfcfcf;
+
+    transition:.25s;
+
+}
+
+
+
+.hero-dot.active{
+
+    width:34px;
+
+    border-radius:999px;
+
+    background:#111;
+
+}
+
+
+
+
+
+/* =========================
+   LAPTOP
+========================= */
+
+
+@media(max-width:1200px){
+
+
+.hero-slide{
+
+    flex:0 0 calc((100% - 22px) / 2);
+
+}
+
+
+}
+
+
+
+
+
+/* =========================
+   MOBILE
+========================= */
+
+
+@media(max-width:900px){
+
+
+.hero-slider-section{
+
+    width:95%;
+
+    margin:95px auto 25px;
+
+}
+
+
+
+.hero-track{
+
+    gap:0;
+
+}
+
+
+
+.hero-slide{
+
+    flex:0 0 100%;
+
+}
+
+
+
+.hero-slide img{
+
+    aspect-ratio:2 / 1;
+
+    border-radius:22px;
+
+}
+
+
+
+.hero-dots{
+
+    margin-top:12px;
+
+}
+
+
+
+}
 
 
 /* =========================
