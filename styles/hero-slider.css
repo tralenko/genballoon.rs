@@ -36,14 +36,12 @@
 
     will-change:transform;
 
-    align-items:flex-start;
-
 }
 
 
 
 /* =========================
-   SLIDES
+   SLIDES DESKTOP
 ========================= */
 
 
@@ -51,9 +49,7 @@
 
     flex:0 0 calc((100% - 44px) / 3);
 
-    aspect-ratio:2 / 1;
-
-    overflow:hidden;
+    min-width:0;
 
 }
 
@@ -63,7 +59,7 @@
 
     width:100%;
 
-    height:100%;
+    aspect-ratio:2 / 1;
 
     object-fit:cover;
 
@@ -73,22 +69,6 @@
 
     border:1px solid rgb(226,226,226);
 
-    background:white;
-
-}
-
-
-
-/* =========================
-   BUTTONS
-========================= */
-
-
-.hero-prev,
-.hero-next{
-
-    display:none;
-
 }
 
 
@@ -108,7 +88,7 @@
 
     gap:10px;
 
-    margin-top:18px;
+    margin-top:12px;
 
 }
 
@@ -144,8 +124,19 @@
 
 
 
+/* стрелки выключены */
+
+.hero-prev,
+.hero-next{
+
+    display:none;
+
+}
+
+
+
 /* =========================
-   LAPTOP / TABLET
+   TABLET
 ========================= */
 
 
@@ -193,19 +184,13 @@
 
     flex:0 0 100%;
 
-    aspect-ratio:2 / 1;
-
 }
 
 
 
 .hero-slide img{
 
-    width:100%;
-
-    height:100%;
-
-    object-fit:cover;
+    aspect-ratio:2 / 1;
 
     border-radius:22px;
 
@@ -219,314 +204,5 @@
 
 }
 
-
-}
-
-/* =========================
-   BUTTONS
-========================= */
-
-
-.hero-prev,
-.hero-next{
-
-    display:none;
-
-}
-
-
-
-
-/* =========================
-   DOTS
-========================= */
-
-
-.hero-dots{
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    gap:10px;
-
-    margin-top:18px;
-
-}
-
-
-
-.hero-dot{
-
-    width:10px;
-
-    height:10px;
-
-    border-radius:50%;
-
-    background:#cfcfcf;
-
-    transition:.25s;
-
-}
-
-
-
-.hero-dot.active{
-
-    width:34px;
-
-    border-radius:999px;
-
-    background:#111;
-
-}
-
-
-
-
-
-/* =========================
-   LAPTOP
-========================= */
-
-
-@media(max-width:1200px){
-
-
-.hero-slide{
-
-    flex:0 0 calc((100% - 22px) / 2);
-
-}
-
-
-}
-
-
-
-
-
-/* =========================
-   MOBILE
-========================= */
-
-
-@media(max-width:900px){
-
-.hero-slider-section{
-
-    width:95%;
-
-    margin:95px auto 25px;
-
-}
-
-
-.hero-track{
-
-    gap:0;
-
-}
-
-
-.hero-slide{
-
-    flex:0 0 100%;
-
-    aspect-ratio:2 / 1;
-
-}
-
-
-.hero-slide img{
-
-    border-radius:22px;
-
-}
-
-}
-
-
-
-.hero-dots{
-
-    margin-top:12px;
-
-}
-
-
-
-}
-
-
-/* =========================
-   BUTTONS
-========================= */
-
-
-.hero-prev,
-.hero-next{
-
-    position:absolute;
-
-    top:50%;
-
-    transform:translateY(-50%);
-
-    width:46px;
-
-    height:46px;
-
-    border:none;
-
-    border-radius:50%;
-
-    background:white;
-
-    cursor:pointer;
-
-    font-size:24px;
-
-    z-index:5;
-
-    box-shadow:
-    0 6px 18px rgba(0,0,0,.15);
-
-}
-
-
-
-.hero-prev{
-
-    left:15px;
-
-}
-
-
-
-.hero-next{
-
-    right:15px;
-
-}
-
-
-
-/* =========================
-   DOTS
-========================= */
-
-
-.hero-dots{
-
-    display:flex;
-
-    justify-content:center;
-
-    gap:10px;
-
-    margin-top:18px;
-
-}
-
-
-
-.hero-dot{
-
-    width:10px;
-
-    height:10px;
-
-    border-radius:50%;
-
-    background:#cfcfcf;
-
-}
-
-
-
-.hero-dot.active{
-
-    width:34px;
-
-    border-radius:999px;
-
-    background:#111;
-
-}
-
-
-
-
-/* =========================
-   LAPTOP
-========================= */
-
-
-@media(max-width:1200px){
-
-
-.hero-slide{
-
-    flex:0 0 calc((100% - 22px)/2);
-
-}
-
-
-}
-
-
-
-/* =========================
-   MOBILE
-========================= */
-
-
-@media(max-width:900px){
-
-
-.hero-slider-section{
-
-    width:95%;
-
-    margin:95px auto 25px;
-
-}
-
-
-
-.hero-track{
-
-    gap:0;
-
-}
-
-
-
-.hero-slide{
-
-    flex:0 0 100%;
-
-}
-
-
-
-.hero-slide img{
-
-    aspect-ratio:2/1;
-
-    border-radius:22px;
-
-}
-
-}
-
-.hero-prev,
-.hero-next{
-
-    display:none;
 
 }
