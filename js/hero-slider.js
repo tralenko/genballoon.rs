@@ -1,4 +1,4 @@
-window.addEventListener("load",()=>{
+document.addEventListener("DOMContentLoaded",()=>{
 
 
 const slider = document.querySelector(".hero-slider");
