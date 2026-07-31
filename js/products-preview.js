@@ -1,38 +1,121 @@
 document.addEventListener("DOMContentLoaded", async () => {
 
-    const row = document.getElementById("home-products-row");
 
-    if (!row) return;
+const rows = document.querySelectorAll(".home-products-row");
 
-    const { data, error } = await supabaseClient
-        .from("products")
-        .select("*")
-        .eq("type", "file")
-        .limit(5);
 
-    if (error) {
-        console.error(error);
-        return;
+if(!rows.length) return;
+
+
+
+
+function getProductsLimit(){
+
+
+    const width = window.innerWidth;
+
+
+    if(width <= 900){
+
+        return 5;
+
     }
 
-    row.innerHTML = "";
 
-    data.forEach(product => {
+    return Math.max(
+        5,
+        Math.floor((width * 0.93) / 202)
+    );
 
-        const card = document.createElement("div");
-        card.className = "home-product-card";
-        card.dataset.id = product.id;
 
-        card.innerHTML = `
-            <div class="home-product-image">
-                <img src="${product.image_url || ""}" alt="${product.title}">
-            </div>
+}
 
-            <div class="home-product-name">
-                ${product.title}
-            </div>
 
-            <button
+
+
+
+for(const row of rows){
+
+
+    const category = row.dataset.category;
+
+
+
+    const limit = getProductsLimit();
+
+
+
+
+    const {data,error} = await window.supabaseClient
+
+
+        .from("products_rs")
+
+
+        .select("*")
+
+
+        .eq("active",true)
+
+
+        .eq("category",category)
+
+
+        .limit(limit);
+
+
+
+
+
+    if(error){
+
+        console.error(error);
+
+        continue;
+
+    }
+
+
+
+
+
+    row.innerHTML="";
+
+
+
+
+
+    data.forEach(product=>{
+
+
+        const card=document.createElement("div");
+
+
+        card.className="home-product-card";
+
+
+        card.dataset.id=product.id;
+
+
+
+        card.innerHTML=`
+
+        <div class="home-product-image">
+
+            <img src="${product.image_url || 'icons/no-image.png'}">
+
+        </div>
+
+
+        <div class="home-product-name">
+
+            ${product.title_sr}
+
+        </div>
+
+
+
+        <button
                 class="home-product-buy add-to-cart-btn"
                 data-id="${product.id}"
                 data-title="${product.title}"
@@ -63,75 +146,77 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             </button>
 
-            <div class="home-product-price">
 
-                <span class="price-number">
-                    ${product.price}
-                </span>
-            
-                <span class="price-currency">
-                    din
-                </span>
-            
-            </div>
+
+        <div class="home-product-price">
+
+            <span class="price-number">
+
+                ${product.price}
+
+            </span>
+
+
+            <span class="price-currency">
+
+                din
+
+            </span>
+
+
+        </div>
+
         `;
+
 
         row.appendChild(card);
 
+
     });
 
-    // Карточка "Посмотреть все"
 
-    const more = document.createElement("a");
 
-    more.href = "product-catalog.html";
 
-    more.className = "home-more-card";
 
-    more.innerHTML = `
-        <div class="home-more-icon">→</div>
+    const more=document.createElement("a");
+
+
+    more.href="product-catalog.html";
+
+
+    more.className="home-more-card";
+
+
+    more.innerHTML=`
+
+        <div class="home-more-icon">
+
+            →
+
+        </div>
+
 
         <div class="home-more-title">
-            View all
+
+            Pogledajte sve
+
         </div>
 
+
         <div class="home-more-text">
-            Browse the complete digital goods catalog
+
+            Svi proizvodi iz kataloga
+
         </div>
+
     `;
+
 
     row.appendChild(more);
 
 
+}
 
-    // Делегирование кликов
 
-    row.addEventListener("click", e => {
-
-        const buyBtn = e.target.closest(".add-to-cart-btn");
-
-        if (buyBtn) {
-
-            addToCart({
-                id: buyBtn.dataset.id,
-                title: buyBtn.dataset.title,
-                price: buyBtn.dataset.price,
-                image_url: buyBtn.dataset.image
-            });
-
-            if (typeof showCartToast === "function") {
-                showCartToast();
-            }
-
-            return;
-        }
-
-        const card = e.target.closest(".home-product-card");
-
-        if (!card) return;
-
-        window.location.href = `product.html?id=${card.dataset.id}`;
-
-    });
 
 });
