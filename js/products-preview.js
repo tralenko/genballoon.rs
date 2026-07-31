@@ -1,423 +1,222 @@
-/* ==========================================
-   HOME DIGITAL GOODS
-========================================== */
-.home-section-header{
+document.addEventListener("DOMContentLoaded", async () => {
 
-    width:93%;
-    max-width:1500px;
 
-    margin:20px auto 18px;
+const rows = document.querySelectorAll(".home-products-row");
 
-}
 
-.home-section-header h2{
+if(!rows.length) return;
 
-    margin:0;
 
-    font-size:24px;
 
-    font-weight:600;
 
-}
+function getProductsLimit(){
 
-.home-products-title{
-    font-size:30px;
-    font-weight:600;
-    color:#111;
-}
 
-.home-products-subtitle{
-    margin-top:6px;
-    color:#666;
-    font-size:15px;
-}
+    const width = window.innerWidth;
 
-.home-products-row{
 
-    width:93%;
-    max-width:1500px;
+    if(width <= 900){
 
-    margin:0 auto;
+        return 5;
 
-    display:flex;
+    }
 
-    gap:22px;
 
-    overflow-x:auto;
-    overflow-y:hidden;
+    return Math.max(
+        5,
+        Math.floor((width * 0.93) / 202)
+    );
 
-    scroll-behavior:smooth;
-
-    padding:8px 0px 18px;
 
 }
 
-.home-products-row::-webkit-scrollbar{
-    height:8px;
-}
 
-.home-products-row::-webkit-scrollbar-thumb{
-    background:#d3d3d3;
-    border-radius:999px;
-}
 
-.home-products-row::-webkit-scrollbar-track{
-    background:transparent;
-}
 
-/* ==========================================
-   PRODUCT CARD
-========================================== */
 
-.home-product-card{
+for(const row of rows){
 
-    flex:0 0 180px;
 
-    display:grid;
-    grid-template-columns:1fr 1fr;
+    const category = row.dataset.category;
 
-    border:1px solid rgb(205,205,211);
 
-    border-radius:20px;
 
-    padding:8px;
+    const limit = getProductsLimit();
 
-    background:#fff;
 
-    transition:
-        transform .3s,
-        box-shadow .3s,
-        border-color .3s;
 
-    cursor:pointer;
 
-    box-shadow:none;
+    const {data,error} = await window.supabaseClient
 
-}
 
-.home-product-card:hover{
+        .from("products_rs")
 
-    transform:translateY(-6px);
 
-    border-color:#8bc9ff;
+        .select("*")
 
-    box-shadow:
-        0 15px 35px rgba(24,119,242,.18);
 
-}
+        .eq("active",true)
 
-.home-product-image{
 
-    grid-column:span 2;
+        .eq("category",category)
 
-}
 
-.home-product-image img{
+        .limit(limit);
 
-    width:100%;
-    aspect-ratio:1/1;
 
-    object-fit:cover;
 
-    border-radius:12px;
 
-}
 
-.home-product-name{
+    if(error){
 
-    grid-column:span 2;
+        console.error(error);
 
-    font-size:14px;
+        continue;
 
-    font-weight:500;
+    }
 
-    margin:10px 0;
 
-    line-height:1.3;
 
-    height:36px;
 
-    color:#111;
 
-}
+    row.innerHTML="";
 
-.home-product-buy{
 
-    width:100%;
-    height:40px;
 
-    border:none;
 
-    border-radius:10px;
 
-    background:rgb(36,71,174);
+    data.forEach(product=>{
 
-    color:#fff;
 
-    cursor:pointer;
+        const card=document.createElement("div");
 
-    display:flex;
-    justify-content:center;
-    align-items:center;
 
-}
+        card.className="home-product-card";
 
-.home-product-price{
 
-    display:flex;
+        card.dataset.id=product.id;
 
-    flex-direction:column;
 
-    align-items:flex-end;
 
-    justify-content:center;
+        card.innerHTML=`
 
-    line-height:1;
+        <div class="home-product-image">
 
-}
+            <img src="${product.image_url || 'icons/no-image.png'}">
 
+        </div>
 
-.price-number{
 
-    font-size:20px;
+        <div class="home-product-name">
 
-    font-weight:700;
+            ${product.title_sr}
 
-}
+        </div>
 
 
-.price-currency{
 
-    font-size:12px;
+        <button
+                class="home-product-buy add-to-cart-btn"
+                data-id="${product.id}"
+                data-title="${product.title}"
+                data-price="${product.price}"
+                data-image="${product.image_url || ""}">
 
-    color:#777;
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     width="22"
+                     height="22"
+                     viewBox="0 0 24 24"
+                     fill="none">
 
-    margin-top:2px;
+                    <path d="M6 6h15l-2 9H7L6 6Z"
+                          stroke="white"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"/>
 
-}
+                    <path d="M6 6L5 3H2"
+                          stroke="white"
+                          stroke-width="2"
+                          stroke-linecap="round"/>
 
-.home-product-price p{
+                    <circle cx="9" cy="20" r="1.5" fill="white"/>
+                    <circle cx="18" cy="20" r="1.5" fill="white"/>
 
-    width:75%;
+                </svg>
 
-    display:flex;
-    justify-content:center;
-    align-items:center;
+            </button>
 
-    margin:0;
 
-    font-size:18px;
-    font-weight:500;
 
-    color:#111;
+        <div class="home-product-price">
 
-}
+            <span class="price-number">
 
-/* ==========================================
-   VIEW ALL CARD
-========================================== */
+                ${product.price}
 
-.home-more-card{
+            </span>
 
-    flex:0 0 180px;
 
-    border:2px dashed rgb(205,205,211);
+            <span class="price-currency">
 
-    border-radius:20px;
+                din
 
-    background:#fafafa;
+            </span>
 
-    display:flex;
 
-    flex-direction:column;
+        </div>
 
-    justify-content:center;
+        `;
 
-    align-items:center;
 
-    text-align:center;
+        row.appendChild(card);
 
-    padding:25px;
 
-    text-decoration:none;
+    });
 
-    transition:.3s;
 
-    color:#111;
+
+
+
+    const more=document.createElement("a");
+
+
+    more.href="product-catalog.html";
+
+
+    more.className="home-more-card";
+
+
+    more.innerHTML=`
+
+        <div class="home-more-icon">
+
+            →
+
+        </div>
+
+
+        <div class="home-more-title">
+
+            Pogledajte sve
+
+        </div>
+
+
+        <div class="home-more-text">
+
+            Svi proizvodi iz kataloga
+
+        </div>
+
+    `;
+
+
+    row.appendChild(more);
+
 
 }
 
-.home-more-card:hover{
 
-    background:white;
 
-    border-color:#1877f2;
-
-    transform:translateY(-6px);
-
-    box-shadow:
-        0 15px 35px rgba(24,119,242,.15);
-
-}
-
-.home-more-icon{
-
-    width:64px;
-    height:64px;
-
-    border-radius:50%;
-
-    background:#1877f2;
-
-    color:#fff;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    font-size:36px;
-
-    margin-bottom:20px;
-
-}
-
-.home-more-title{
-
-    font-size:22px;
-
-    font-weight:600;
-
-    margin-bottom:10px;
-
-}
-
-.home-more-text{
-
-    color:#666;
-
-    font-size:14px;
-
-    line-height:1.5;
-
-}
-
-/* ==========================================
-   MOBILE
-========================================== */
-
-@media(max-width:900px){
-
-.home-products-section{
-
-    width:95%;
-    margin:45px auto;
-
-}
-
-.home-products-title{
-
-    font-size:24px;
-
-}
-
-.home-products-subtitle{
-
-    font-size:14px;
-
-}
-
-.home-products-row{
-
-    gap:14px;
-
-    padding-bottom:14px;
-    margin-bottom:14px;
-
-}
-
-.home-product-card{
-
-    flex:0 0 165px;
-
-    border-radius:18px;
-
-}
-
-.home-product-name{
-
-    font-size:13px;
-
-    height:14px;
-
-}
-
-.home-product-buy{
-
-    height:36px;
-
-}
-
-.home-product-price{
-
-    font-size:16px;
-
-}
-
-.home-more-card{
-
-    flex:0 0 165px;
-
-    border-radius:18px;
-
-    padding:18px;
-
-}
-
-.home-more-icon{
-
-    width:52px;
-    height:52px;
-
-    font-size:28px;
-
-    margin-bottom:14px;
-
-}
-
-.home-more-title{
-
-    font-size:18px;
-
-}
-
-.home-more-text{
-
-    font-size:13px;
-
-}
-
-}
-
-@media(max-width:500px){
-
-.home-products-row{
-
-    gap:12px;
-
-}
-
-.home-product-card{
-
-    flex:0 0 150px;
-
-}
-
-.home-more-card{
-
-    flex:0 0 150px;
-
-}
-
-}
+});
