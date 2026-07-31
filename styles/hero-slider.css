@@ -165,7 +165,6 @@
 
 @media(max-width:900px){
 
-
 .hero-slider-section{
 
     width:95%;
@@ -175,7 +174,6 @@
 }
 
 
-
 .hero-track{
 
     gap:0;
@@ -183,20 +181,20 @@
 }
 
 
-
 .hero-slide{
 
     flex:0 0 100%;
 
-}
+    aspect-ratio:2 / 1;
 
+}
 
 
 .hero-slide img{
 
-    aspect-ratio:2 / 1;
-
     border-radius:22px;
+
+}
 
 }
 
