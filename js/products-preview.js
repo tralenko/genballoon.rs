@@ -1,222 +1,423 @@
-document.addEventListener("DOMContentLoaded", async () => {
+/* ==========================================
+   HOME DIGITAL GOODS
+========================================== */
+.home-section-header{
 
+    width:93%;
+    max-width:1500px;
 
-const rows = document.querySelectorAll(".home-products-row");
+    margin:20px auto 18px;
 
+}
 
-if(!rows.length) return;
+.home-section-header h2{
 
+    margin:0;
 
+    font-size:24px;
 
+    font-weight:600;
 
-function getProductsLimit(){
+}
 
+.home-products-title{
+    font-size:30px;
+    font-weight:600;
+    color:#111;
+}
 
-    const width = window.innerWidth;
+.home-products-subtitle{
+    margin-top:6px;
+    color:#666;
+    font-size:15px;
+}
 
+.home-products-row{
 
-    if(width <= 900){
+    width:93%;
+    max-width:1500px;
 
-        return 5;
+    margin:0 auto;
 
-    }
+    display:flex;
 
+    gap:22px;
 
-    return Math.max(
-        5,
-        Math.floor((width * 0.93) / 202)
-    );
+    overflow-x:auto;
+    overflow-y:hidden;
 
+    scroll-behavior:smooth;
+
+    padding:8px 0px 18px;
+
+}
+
+.home-products-row::-webkit-scrollbar{
+    height:8px;
+}
+
+.home-products-row::-webkit-scrollbar-thumb{
+    background:#d3d3d3;
+    border-radius:999px;
+}
+
+.home-products-row::-webkit-scrollbar-track{
+    background:transparent;
+}
+
+/* ==========================================
+   PRODUCT CARD
+========================================== */
+
+.home-product-card{
+
+    flex:0 0 180px;
+
+    display:grid;
+    grid-template-columns:1fr 1fr;
+
+    border:1px solid rgb(205,205,211);
+
+    border-radius:20px;
+
+    padding:8px;
+
+    background:#fff;
+
+    transition:
+        transform .3s,
+        box-shadow .3s,
+        border-color .3s;
+
+    cursor:pointer;
+
+    box-shadow:none;
+
+}
+
+.home-product-card:hover{
+
+    transform:translateY(-6px);
+
+    border-color:#8bc9ff;
+
+    box-shadow:
+        0 15px 35px rgba(24,119,242,.18);
+
+}
+
+.home-product-image{
+
+    grid-column:span 2;
+
+}
+
+.home-product-image img{
+
+    width:100%;
+    aspect-ratio:1/1;
+
+    object-fit:cover;
+
+    border-radius:12px;
+
+}
+
+.home-product-name{
+
+    grid-column:span 2;
+
+    font-size:14px;
+
+    font-weight:500;
+
+    margin:10px 0;
+
+    line-height:1.3;
+
+    height:36px;
+
+    color:#111;
+
+}
+
+.home-product-buy{
+
+    width:100%;
+    height:40px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:rgb(36,71,174);
+
+    color:#fff;
+
+    cursor:pointer;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+}
+
+.home-product-price{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:flex-end;
+
+    justify-content:center;
+
+    line-height:1;
 
 }
 
 
+.price-number{
 
+    font-size:20px;
 
-
-for(const row of rows){
-
-
-    const category = row.dataset.category;
-
-
-
-    const limit = getProductsLimit();
-
-
-
-
-    const {data,error} = await window.supabaseClient
-
-
-        .from("products_rs")
-
-
-        .select("*")
-
-
-        .eq("active",true)
-
-
-        .eq("category",category)
-
-
-        .limit(limit);
-
-
-
-
-
-    if(error){
-
-        console.error(error);
-
-        continue;
-
-    }
-
-
-
-
-
-    row.innerHTML="";
-
-
-
-
-
-    data.forEach(product=>{
-
-
-        const card=document.createElement("div");
-
-
-        card.className="home-product-card";
-
-
-        card.dataset.id=product.id;
-
-
-
-        card.innerHTML=`
-
-        <div class="home-product-image">
-
-            <img src="${product.image_url || 'icons/no-image.png'}">
-
-        </div>
-
-
-        <div class="home-product-name">
-
-            ${product.title_sr}
-
-        </div>
-
-
-
-        <button
-                class="home-product-buy add-to-cart-btn"
-                data-id="${product.id}"
-                data-title="${product.title}"
-                data-price="${product.price}"
-                data-image="${product.image_url || ""}">
-
-                <svg xmlns="http://www.w3.org/2000/svg"
-                     width="22"
-                     height="22"
-                     viewBox="0 0 24 24"
-                     fill="none">
-
-                    <path d="M6 6h15l-2 9H7L6 6Z"
-                          stroke="white"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"/>
-
-                    <path d="M6 6L5 3H2"
-                          stroke="white"
-                          stroke-width="2"
-                          stroke-linecap="round"/>
-
-                    <circle cx="9" cy="20" r="1.5" fill="white"/>
-                    <circle cx="18" cy="20" r="1.5" fill="white"/>
-
-                </svg>
-
-            </button>
-
-
-
-        <div class="home-product-price">
-
-            <span class="price-number">
-
-                ${product.price}
-
-            </span>
-
-
-            <span class="price-currency">
-
-                din
-
-            </span>
-
-
-        </div>
-
-        `;
-
-
-        row.appendChild(card);
-
-
-    });
-
-
-
-
-
-    const more=document.createElement("a");
-
-
-    more.href="product-catalog.html";
-
-
-    more.className="home-more-card";
-
-
-    more.innerHTML=`
-
-        <div class="home-more-icon">
-
-            →
-
-        </div>
-
-
-        <div class="home-more-title">
-
-            Pogledajte sve
-
-        </div>
-
-
-        <div class="home-more-text">
-
-            Svi proizvodi iz kataloga
-
-        </div>
-
-    `;
-
-
-    row.appendChild(more);
-
+    font-weight:700;
 
 }
 
 
+.price-currency{
 
-});
+    font-size:12px;
+
+    color:#777;
+
+    margin-top:2px;
+
+}
+
+.home-product-price p{
+
+    width:75%;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    margin:0;
+
+    font-size:18px;
+    font-weight:500;
+
+    color:#111;
+
+}
+
+/* ==========================================
+   VIEW ALL CARD
+========================================== */
+
+.home-more-card{
+
+    flex:0 0 180px;
+
+    border:2px dashed rgb(205,205,211);
+
+    border-radius:20px;
+
+    background:#fafafa;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+    padding:25px;
+
+    text-decoration:none;
+
+    transition:.3s;
+
+    color:#111;
+
+}
+
+.home-more-card:hover{
+
+    background:white;
+
+    border-color:#1877f2;
+
+    transform:translateY(-6px);
+
+    box-shadow:
+        0 15px 35px rgba(24,119,242,.15);
+
+}
+
+.home-more-icon{
+
+    width:64px;
+    height:64px;
+
+    border-radius:50%;
+
+    background:#1877f2;
+
+    color:#fff;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:36px;
+
+    margin-bottom:20px;
+
+}
+
+.home-more-title{
+
+    font-size:22px;
+
+    font-weight:600;
+
+    margin-bottom:10px;
+
+}
+
+.home-more-text{
+
+    color:#666;
+
+    font-size:14px;
+
+    line-height:1.5;
+
+}
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media(max-width:900px){
+
+.home-products-section{
+
+    width:95%;
+    margin:45px auto;
+
+}
+
+.home-products-title{
+
+    font-size:24px;
+
+}
+
+.home-products-subtitle{
+
+    font-size:14px;
+
+}
+
+.home-products-row{
+
+    gap:14px;
+
+    padding-bottom:14px;
+    margin-bottom:14px;
+
+}
+
+.home-product-card{
+
+    flex:0 0 165px;
+
+    border-radius:18px;
+
+}
+
+.home-product-name{
+
+    font-size:13px;
+
+    height:14px;
+
+}
+
+.home-product-buy{
+
+    height:36px;
+
+}
+
+.home-product-price{
+
+    font-size:16px;
+
+}
+
+.home-more-card{
+
+    flex:0 0 165px;
+
+    border-radius:18px;
+
+    padding:18px;
+
+}
+
+.home-more-icon{
+
+    width:52px;
+    height:52px;
+
+    font-size:28px;
+
+    margin-bottom:14px;
+
+}
+
+.home-more-title{
+
+    font-size:18px;
+
+}
+
+.home-more-text{
+
+    font-size:13px;
+
+}
+
+}
+
+@media(max-width:500px){
+
+.home-products-row{
+
+    gap:12px;
+
+}
+
+.home-product-card{
+
+    flex:0 0 150px;
+
+}
+
+.home-more-card{
+
+    flex:0 0 150px;
+
+}
+
+}
