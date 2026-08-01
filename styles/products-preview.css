@@ -32,37 +32,36 @@
     font-size:15px;
 }
 
-.home-products-row{
-
-    width:93%;
-    max-width:1500px;
-
-    margin:0 auto;
-
-    display:flex;
-
-    gap:22px;
+.home-products-scroll{
 
     overflow-x:auto;
     overflow-y:hidden;
 
     scroll-behavior:smooth;
 
-    padding:8px 0px 18px;
+    scrollbar-width:none;
 
 }
 
-.home-products-row::-webkit-scrollbar{
-    height:8px;
+.home-products-scroll::-webkit-scrollbar{
+
+    display:none;
+
 }
 
-.home-products-row::-webkit-scrollbar-thumb{
-    background:#d3d3d3;
-    border-radius:999px;
-}
+.home-products-row{
 
-.home-products-row::-webkit-scrollbar-track{
-    background:transparent;
+    display:flex;
+
+    width:max-content;
+
+    gap:22px;
+
+    padding:
+        8px
+        max(calc((100vw - 93vw)/2), calc((100vw - 1500px)/2))
+        18px;
+
 }
 
 /* ==========================================
