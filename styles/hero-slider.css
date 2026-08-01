@@ -51,23 +51,27 @@
 
     min-width:0;
 
+    aspect-ratio:2 / 1;
+
+    overflow:hidden;
+
+    border-radius:28px;
+
+    border:1px solid rgb(226,226,226);
+
+    background:#fff;
+
 }
-
-
 
 .hero-slide img{
 
     width:100%;
 
-    aspect-ratio:2 / 1;
-
-    object-fit:cover;
+    height:100%;
 
     display:block;
 
-    border-radius:28px;
-
-    border:1px solid rgb(226,226,226);
+    object-fit:cover;
 
 }
 
