@@ -34,6 +34,26 @@
 
     font-weight:600;
 
+    display:flex;
+
+    align-items:baseline;
+
+    gap:8px;
+
+}
+
+.home-section-subtitle{
+
+    font-size: 18px;
+
+    font-weight:500;
+
+    color:#222222;
+
+    
+
+    letter-spacing:.5px;
+
 }
 
 .home-products-title{
@@ -59,12 +79,14 @@
 
     gap:22px;
 
+    justify-content:flex-start;
+
     overflow-x:auto;
     overflow-y:hidden;
 
     scroll-behavior:smooth;
 
-    padding:8px 0px 18px;
+    padding:8px 0 18px;
 
 }
 
@@ -206,7 +228,7 @@
 
     font-size:20px;
 
-    font-weight:700;
+    font-weight:600;
 
 }
 
@@ -458,3 +480,4 @@
 }
 
 }
+
