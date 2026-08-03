@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>GenSpace</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase.js"></script>
+    <script src="js/auth-menu.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet">
+    <link rel="stylesheet" href="styles/header.css">
+    <link rel="stylesheet" href="styles/general.css">
+    <link rel="stylesheet" href="styles/ad-style.css">
+    <link rel="stylesheet" href="styles/footer.css">
+    <link rel="stylesheet" href="styles/product.css">
+
+    <script defer src="js/header.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/product.js" defer></script>
+
+    <style>
+    /* =========================
+       PRODUCT PAGE — переменные
+    ========================= */
+    :root{
+      --accent:#1877f2;
+      --accent-soft:#eaf2ff;
+      --border:rgb(205, 205, 211);
+      --border-light:#ececec;
+      --text-muted:#666;
+      --radius-lg:20px;
+      --radius-md:14px;
+      --radius-sm:10px;
+    }
+
+    *{ box-sizing:border-box; }
+
+    /* =========================
+       BREADCRUMB
+    ========================= */
+    .product-breadcrumb{
+      max-width:1100px;
+      margin:0 auto;
+      padding:0 20px;
+      margin-top:calc(60px + 24px);
+      display:flex;
+      align-items:center;
+      gap:8px;
+      font-size:14px;
+      color:var(--text-muted);
+    }
+
+    .product-breadcrumb a{
+      color:var(--text-muted);
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      transition:color .2s ease;
+    }
+
+    .product-breadcrumb a:hover{
+      color:var(--accent);
+    }
+
+    .product-breadcrumb .sep{
+      color:#c7c7cc;
+    }
+
+    .product-breadcrumb .current{
+      color:#333;
+      max-width:320px;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+    }
+
+    /* =========================
+       LAYOUT
+    ========================= */
+    .product-page{
+      max-width:1100px;
+      margin:18px auto 80px;
+      padding:0 20px;
+    }
+
+    .product-layout{
+      display:grid;
+      grid-template-columns:1.05fr 0.95fr;
+      gap:48px;
+      align-items:flex-start;
+    }
+
+    /* =========================
+       GALLERY
+    ========================= */
+    .product-gallery{
+      position:sticky;
+      top:90px;
+    }
+
+    .gallery-main{
+      position:relative;
+      border-radius:var(--radius-lg);
+      overflow:hidden;
+      background:#f2f2f4;
+      aspect-ratio:1/1;
+    }
+
+    .gallery-track{
+      display:flex;
+      height:100%;
+      overflow-x:auto;
+      scroll-snap-type:x mandatory;
+      scroll-behavior:smooth;
+      -webkit-overflow-scrolling:touch;
+      scrollbar-width:none;
+    }
+
+    .gallery-track::-webkit-scrollbar{
+      display:none;
+    }
+
+    .gallery-slide{
+      flex:0 0 100%;
+      scroll-snap-align:start;
+      height:100%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .gallery-slide img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
+    .gallery-slide.placeholder{
+      color:#b8b8bd;
+      font-size:14px;
+      background:#f2f2f4;
+    }
+
+    .gallery-nav{
+      position:absolute;
+      top:50%;
+      transform:translateY(-50%);
+      width:40px;
+      height:40px;
+      border-radius:50%;
+      border:none;
+      background:rgba(255,255,255,.9);
+      box-shadow:0 2px 10px rgba(0,0,0,.12);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+      font-size:16px;
+      color:#333;
+      transition:background .2s ease, transform .2s ease;
+      z-index:2;
+    }
+
+    .gallery-nav:hover{
+      background:#fff;
+    }
+
+    .gallery-nav.prev{ left:14px; }
+    .gallery-nav.next{ right:14px; }
+
+    .gallery-dots{
+      display:flex;
+      justify-content:center;
+      gap:6px;
+      margin-top:14px;
+    }
+
+    .gallery-dots .dot{
+      width:6px;
+      height:6px;
+      border-radius:50%;
+      background:var(--border);
+      cursor:pointer;
+      transition:background .25s ease, width .25s ease;
+    }
+
+    .gallery-dots .dot.active{
+      background:var(--accent);
+      width:18px;
+      border-radius:4px;
+    }
+
+    .gallery-thumbs{
+      display:flex;
+      gap:10px;
+      margin-top:16px;
+      flex-wrap:wrap;
+    }
+
+    .gallery-thumbs .thumb{
+      width:64px;
+      height:64px;
+      border-radius:10px;
+      overflow:hidden;
+      border:2px solid transparent;
+      cursor:pointer;
+      opacity:.65;
+      transition:opacity .2s ease, border-color .2s ease;
+      flex-shrink:0;
+    }
+
+    .gallery-thumbs .thumb img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
+    .gallery-thumbs .thumb.active{
+      opacity:1;
+      border-color:var(--accent);
+    }
+
+    /* =========================
+       INFO
+    ========================= */
+    .product-info{
+      padding-top:4px;
+    }
+
+    .product-title{
+      font-size:26px;
+      font-weight:700;
+      margin:0 0 12px 0;
+      line-height:1.3;
+    }
+
+    .product-desc{
+      font-size:14.5px;
+      line-height:1.7;
+      color:#4a4a4a;
+      margin-bottom:22px;
+    }
+
+    .product-desc p{
+      margin:0 0 10px 0;
+    }
+
+    .product-features{
+      background:#fff;
+      border:1px solid var(--border-light);
+      border-radius:var(--radius-md);
+      padding:6px 14px;
+      margin-bottom:24px;
+    }
+
+    .feature-item{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-size:13.5px;
+      color:#444;
+      padding:11px 0;
+    }
+
+    .feature-item:not(:last-child){
+      border-bottom:1px solid var(--border-light);
+    }
+
+    .feature-icon{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-width:20px;
+      height:20px;
+      background:var(--accent-soft);
+      color:var(--accent);
+      border-radius:50%;
+      font-size:11px;
+      font-weight:700;
+      flex-shrink:0;
+    }
+
+    /* =========================
+       PURCHASE BOX
+    ========================= */
+    .product-purchase{
+      display:flex;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:14px;
+      padding-top:6px;
+      border-top:1px solid var(--border-light);
+    }
+
+    .product-price{
+      font-size:22px;
+      font-weight:700;
+      color:#1a1a1a;
+    }
+
+    .product-price .price-note{
+      display:block;
+      font-size:12px;
+      font-weight:400;
+      color:#999;
+      margin-top:2px;
+    }
+
+    .qty-control{
+      display:flex;
+      align-items:center;
+      border:1px solid var(--border);
+      border-radius:var(--radius-sm);
+      overflow:hidden;
+      margin-left:auto;
+    }
+
+    .qty-btn{
+      width:36px;
+      height:38px;
+      border:none;
+      background:#fff;
+      cursor:pointer;
+      font-size:16px;
+      color:#333;
+      transition:background .2s ease;
+    }
+
+    .qty-btn:hover{
+      background:#f6f7f9;
+    }
+
+    .qty-value{
+      min-width:32px;
+      text-align:center;
+      font-size:14px;
+      font-weight:500;
+    }
+
+    .add-to-cart-btn-main{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      font-size:14.5px;
+      font-weight:600;
+      letter-spacing:.3px;
+      color:#fff;
+      background:var(--accent);
+      height:46px;
+      padding:0 26px;
+      border:none;
+      border-radius:var(--radius-sm);
+      cursor:pointer;
+      width:100%;
+      transition:background .2s ease, transform .15s ease;
+    }
+
+    .add-to-cart-btn-main:hover{
+      background:#1567d9;
+    }
+
+    .add-to-cart-btn-main:active{
+      transform:scale(.98);
+    }
+
+    .product-not-found{
+      max-width:1100px;
+      margin:120px auto;
+      text-align:center;
+      color:#888;
+      font-size:15px;
+      padding:0 20px;
+    }
+
+    /* =========================
+       SKELETON (пока грузится товар)
+    ========================= */
+    .sk{
+      position:relative;
+      overflow:hidden;
+      background:#e8e8e8;
+    }
+
+    .sk::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(90deg, transparent, rgba(255,255,255,.6), transparent);
+      transform:translateX(-100%);
+      animation:sk-shimmer 1.2s infinite;
+    }
+
+    @keyframes sk-shimmer{
+      to{ transform:translateX(100%); }
+    }
+
+    .sk-line{
+      height:14px;
+      border-radius:8px;
+      margin-bottom:10px;
+    }
+
+    /* =========================
+       TOAST
+    ========================= */
+    .cart-toast{
+      position:fixed;
+      bottom:26px;
+      left:50%;
+      transform:translateX(-50%) translateY(20px);
+      background:#1a1a1a;
+      color:#fff;
+      padding:12px 22px;
+      border-radius:999px;
+      font-size:14px;
+      opacity:0;
+      pointer-events:none;
+      transition:opacity .3s ease, transform .3s ease;
+      z-index:999;
+    }
+
+    .cart-toast.show{
+      opacity:1;
+      transform:translateX(-50%) translateY(0);
+    }
+
+    /* =========================
+       MOBILE STICKY CTA
+    ========================= */
+    .mobile-cta-bar{
+      display:none;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+    @media (max-width:900px){
+      .product-layout{
+        grid-template-columns:1fr;
+        gap:24px;
+      }
+
+      .product-gallery{
+        position:static;
+      }
+    }
+
+    @media (max-width:600px){
+      .product-breadcrumb{
+        margin-top:calc(60px + 16px);
+        font-size:13px;
+      }
+
+      .product-page{
+        margin-top:10px;
+        padding:0 16px 110px;
+      }
+
+      .product-title{
+        font-size:21px;
+      }
+
+      .gallery-nav{
+        width:34px;
+        height:34px;
+      }
+
+      .gallery-thumbs{
+        display:none;
+      }
+
+      .product-purchase{
+        flex-direction:column;
+        align-items:stretch;
+      }
+
+      .qty-control{
+        margin-left:0;
+        align-self:flex-start;
+      }
+
+      .mobile-cta-bar{
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        gap:14px;
+        position:fixed;
+        left:0;
+        right:0;
+        bottom:0;
+        background:#fff;
+        border-top:1px solid var(--border-light);
+        padding:12px 16px calc(12px + env(safe-area-inset-bottom));
+        box-shadow:0 -4px 16px rgba(0,0,0,.06);
+        z-index:200;
+      }
+
+      .mobile-cta-price{
+        font-size:17px;
+        font-weight:700;
+        color:#1a1a1a;
+        flex-shrink:0;
+      }
+
+      .mobile-cta-btn{
+        flex:1;
+        max-width:220px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        gap:8px;
+        height:44px;
+        border:none;
+        border-radius:var(--radius-sm);
+        background:var(--accent);
+        color:#fff;
+        font-size:14px;
+        font-weight:600;
+        cursor:pointer;
+      }
+    }
+  </style>
+  </head>
+  <body>
+    <header class="header">
+      <button class="header-burger-btn" id="burger">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="logo" id="logo">
+        <div>
+          <div class="logo-txt">
+            <p><span>GEN</span>BALLOON</p>
+          </div>
+        </div>
+      </div>
+      <div class="menu-buttons-row">
+        <div class="menu-button-box">
+          <button class="menu-button" active onclick="window.location.href='index.html';">
+            <img src="icons/home.png">
+            POČETNA
+          </button>
+        </div>
+        <div class="menu-button-box">
+          <button class="menu-button" onclick="window.location.href='catalog-dekoracije.html';">
+            <img src="icons/dekoracije.png">
+            DEKORACIJE
+          </button>
+      </div>
+        <div class="menu-button-box">
+          <button class="menu-button" onclick="window.location.href='catalog-baloni.html';">
+            <img src="icons/baloni.png">
+            BALONI
+          </button>
+      </div>
+      <div class="menu-button-box education-icon">
+          <button class="menu-button menu-button-education" onclick="window.location.href='catalog-pokloni.html';">
+            <img src="icons/pokloni.png">
+            POKLONI
+          </button>
+        </div>
+        <div class="menu-button-box">
+          <button class="menu-button" onclick="window.location.href='catalog-cvece.html';">
+            <img src="icons/cvece.png">
+            CVEĆE
+          </button>
+        </div>
+        <div class="menu-button-box" onclick="window.location.href='support.html';">
+          <button class="menu-button">
+            <img src="icons/isporuka.png">
+            ISPORUKA
+          </button>
+        </div>
+        <div class="menu-button-box">
+            <button class="menu-button" id="auth-menu-button">
+                <img id="auth-menu-icon" src="icons/log in.png">
+                <span id="auth-menu-text">LOG IN</span>
+            </button>
+        </div>
+      </div>
+      <div class="cart">
+        <button class="cart-button" onclick="window.location.href='cart.html'">
+          <img src="icons/cart-2.png">
+          <span class="cart-badge">0</span>
+        </button>
+      </div>
+    </header>
+
+    <nav class="product-breadcrumb">
+      <a href="product-catalog.html">← Shop</a>
+      <span class="sep">/</span>
+      <span class="current" id="breadcrumb-title">Loading…</span>
+    </nav>
+
+    <main class="product-page" id="product-page">
+
+      <div class="product-layout">
+
+        <div class="product-gallery">
+          <div class="gallery-main" id="gallery-main">
+            <button class="gallery-nav prev" id="gallery-prev" aria-label="Previous photo">&larr;</button>
+            <div class="gallery-track" id="gallery-track"></div>
+            <button class="gallery-nav next" id="gallery-next" aria-label="Next photo">&rarr;</button>
+          </div>
+          <div class="gallery-dots" id="gallery-dots"></div>
+          <div class="gallery-thumbs" id="gallery-thumbs"></div>
+        </div>
+
+        <div class="product-info">
+          <h1 id="product-title" class="product-title">Loading…</h1>
+          <div id="product-desc" class="product-desc"></div>
+
+          <div class="feature-item">
+              <span class="feature-icon">✓</span>
+              Visok kvalitet i dugotrajnost proizvoda
+          </div>
+
+          <div class="feature-item">
+              <span class="feature-icon">✓</span>
+              Sopstvena proizvodnja i pažljiva izrada
+          </div>
+
+          <div class="feature-item">
+              <span class="feature-icon">✓</span>
+              Brza i pouzdana dostava
+          </div>
+
+          <div class="product-purchase">
+            <div id="product-price" class="product-price"></div>
+
+            <div class="qty-control">
+              <button class="qty-btn" id="qty-minus" aria-label="Decrease quantity">−</button>
+              <span class="qty-value" id="qty-value">1</span>
+              <button class="qty-btn" id="qty-plus" aria-label="Increase quantity">+</button>
+            </div>
+
+            <button class="add-to-cart-btn-main" id="add-to-cart-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M6 6h15l-2 9H7L6 6Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M6 6L5 3H2" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="9" cy="20" r="1.5" fill="white"/>
+                <circle cx="18" cy="20" r="1.5" fill="white"/>
+              </svg>
+              DODAJ U KORPU
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </main>
+
+    <div class="mobile-cta-bar">
+      <div class="mobile-cta-price" id="mobile-cta-price"></div>
+      <button class="mobile-cta-btn" id="mobile-add-to-cart-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none">
+          <path d="M6 6h15l-2 9H7L6 6Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M6 6L5 3H2" stroke="white" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="9" cy="20" r="1.5" fill="white"/>
+          <circle cx="18" cy="20" r="1.5" fill="white"/>
+        </svg>
+        ADD TO CART
+      </button>
+    </div>
+
+    <div id="cart-toast" class="cart-toast">
+      <span>✓ Added to cart</span>
+    </div>
+
+    <footer class="footer">
+
+      <!-- TOP -->
+      <div class="footer-top">
+
+        <!-- Brand -->
+        <div class="footer-brand">
+          <span class="footer-logo-word">GENBALLOON LTD</span>
+          <p>Step-by-step balloon tutorials and digital courses for decorators of all levels.</p>
+
+          <!-- Social -->
+          <div class="social-row">
+            <a href="#" class="social-btn" aria-label="TikTok">
+              <svg viewBox="0 0 24 24" width="18" height="18">
+                <path fill="currentColor"
+                  d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.2 8.2 0 0 0 4.79 1.52V6.76a4.85 4.85 0 0 1-1.02-.07z" />
+              </svg>
+            </a>
+            <a href="#" class="social-btn" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                <circle cx="12" cy="12" r="4" />
+                <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none" />
+              </svg>
+            </a>
+            <a href="#" class="social-btn" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" width="18" height="18">
+                <path fill="currentColor" d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+              </svg>
+            </a>
+            <a href="#" class="social-btn" aria-label="YouTube">
+              <svg viewBox="0 0 24 24" width="18" height="18">
+                <path fill="currentColor"
+                  d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z" />
+                <polygon fill="#fff" points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" />
+              </svg>
+            </a>
+          </div>
+
+        </div>
+
+        <!-- Services -->
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="#">Courses</a></li>
+            <li><a href="#">Digital goods</a></li>
+            <li><a href="#">Merch <span class="badge-new">new</span></a></li>
+            <li><a href="#">Subscription</a></li>
+          </ul>
+        </div>
+
+        <!-- Company -->
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#">About us</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Affiliates</a></li>
+            <li><a href="#">Press</a></li>
+          </ul>
+        </div>
+
+        <!-- Support -->
+        <div class="footer-col">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Shipping & delivery</a></li>
+            <li><a href="#">Returns</a></li>
+          </ul>
+        </div>
+
+      </div><!-- /footer-top -->
+
+      <!-- TRUST BAR -->
+      <div class="footer-trust">
+        <span class="trust-label">Why shop with us</span>
+        <div class="trust-pills">
+          <div class="trust-pill">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            </svg>
+            Secure checkout
+          </div>
+          <div class="trust-pill">
+            <svg viewBox="0 0 24 24">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+            Instant digital access
+          </div>
+          <div class="trust-pill">
+            <svg viewBox="0 0 24 24">
+              <polyline points="20 12 20 22 4 22 4 12" />
+              <rect x="2" y="7" width="20" height="5" />
+              <path d="M12 22V7" />
+              <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z" />
+              <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z" />
+            </svg>
+            Free gift included
+          </div>
+          <div class="trust-pill">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.29h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.92z" />
+            </svg>
+            Friendly support
+          </div>
+        </div>
+      </div>
+
+      <!-- BOTTOM -->
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2026 Genballoon Ltd. All rights reserved.</span>
+        <nav class="footer-legal" aria-label="Legal links">
+          <a href="#">Privacy policy</a>
+          <a href="#">Terms of use</a>
+          <a href="#">Cookie settings</a>
+        </nav>
+      </div>
+
+    </footer>
+
+  </body>
+</html>
