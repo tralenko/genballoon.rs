@@ -1,0 +1,132 @@
+/* ==========================================
+   CATEGORY LIST (баннеры категорий)
+========================================== */
+/* =========================
+   TITLE
+========================= */
+.cat-list-section-wrap{
+    width:93%;
+    max-width:1500px;
+    margin:100px auto 0;
+}
+
+.cat-list-title{
+    font-size:28px;
+    font-weight:700;
+    margin:0 0 8px; /* было 20px — уменьшил отступ до карточек */
+    color:#111;
+}
+
+.cat-list-section{
+    margin:0 auto 40px;
+}
+
+@media(max-width:900px){
+
+.cat-list-section-wrap{
+    width:93%;
+    margin:95px auto 0;
+}
+
+.cat-list-title{
+    font-size:22px;
+    margin-bottom:6px;
+    text-align:center; /* заголовок по центру только на мобиле */
+}
+
+.cat-list-section{
+    margin:0 auto 25px;
+}
+
+}
+
+.cat-list-section{
+    width:93%;
+    max-width:1500px;
+    margin:40px auto 40px;
+
+    display:flex;
+    flex-wrap:wrap;
+    gap:22px;
+}
+
+.cat-item{
+    display:block;
+    position:relative;
+
+    flex:0 0 calc((100% - 44px) / 3); /* 3 в ряд, как .hero-slide */
+    min-width:0;
+    aspect-ratio:2 / 1;
+
+    overflow:hidden;
+    border-radius:28px;
+    border:1px solid rgb(226,226,226);
+    background:#fff;
+
+    text-decoration:none;
+    transition:transform .25s ease, box-shadow .25s ease;
+}
+
+.cat-item:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.cat-item img{
+    width:100%;
+    height:100%;
+    display:block;
+    object-fit:cover;
+}
+
+.cat-item .cat-label{
+    position:absolute;
+    left:24px;
+    bottom:20px;
+
+    color:#fff;
+    font-weight:600;
+    font-size:22px;
+
+    text-shadow:0 2px 8px rgba(0,0,0,.35);
+}
+
+/* =========================
+   TABLET
+========================= */
+
+@media(max-width:1200px){
+
+.cat-item{
+    flex:0 0 calc((100% - 22px) / 2);
+}
+
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:900px){
+
+.cat-list-section{
+    width:95%;
+    margin:20px auto 25px;
+    flex-direction:column;
+    gap:16px;
+}
+
+.cat-item{
+    flex:0 0 100%;
+    aspect-ratio:2 / 1;
+    border-radius:22px;
+}
+
+.cat-item .cat-label{
+    left:16px;
+    bottom:14px;
+    font-size:18px;
+}
+
+}
+
