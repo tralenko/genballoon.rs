@@ -88,32 +88,46 @@ header{
   transform: translateY(0) rotate(-45deg);
 }
 
-.logo {
-  width: 250px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  cursor: pointer;
+.logo{
+    width:250px;
 
-  user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+
+    cursor:pointer;
+
+    user-select:none;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
 }
 
-.logo-txt {
-  width: 52px;
-  height: 28px;
+.logo-txt{
+    display:flex;
+    align-items:center;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    width:auto;
+    height:auto;
 
-  font-size: 24px;
-  font-weight: 500;
+    margin:0;
 
-  border-radius: 4px;
+    white-space:nowrap;
+}
+
+.logo-txt p{
+    margin:0;
+
+    font-size:24px;
+    font-weight:700;
+    line-height:1;
+
+    white-space:nowrap;
+}
+
+.logo-txt span{
+    color:rgb(0, 0, 0);
 }
 
 
@@ -417,3 +431,4 @@ header{
     }
 
 }
+
