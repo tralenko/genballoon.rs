@@ -130,11 +130,6 @@ header{
     color:rgb(0, 0, 0);
 }
 
-
-.logo-txt {
-  margin-top: 1px;
-}
-
 .confetti {
   position: fixed;
   width: 10px;
@@ -404,6 +399,20 @@ header{
 }
 
 @media (max-width:900px){
+
+  .logo-txt p{
+    margin:0;
+
+    font-size:18px;
+    font-weight:700;
+    line-height:1;
+
+    white-space:nowrap;
+}
+
+.logo-txt span{
+    color:rgb(0, 0, 0);
+}
 
     .cart{
 
