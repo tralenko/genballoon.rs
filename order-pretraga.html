@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="sr">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Moje porudžbine</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles/general.css">
+    <link rel="stylesheet" href="styles/header.css">
+    <link rel="stylesheet" href="styles/footer.css">
+    <link rel="stylesheet" href="styles/order-pretraga.css">
+
+    <script defer src="js/header.js"></script>
+    <script defer src="js/cart.js"></script>
+
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+      <button class="header-burger-btn" id="burger">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="logo" id="logo">
+        <div>
+          <div class="logo-txt">
+            <p><span>Proslava </span>Majstor</p>
+          </div>
+        </div>
+      </div>
+      <div class="menu-buttons-row">
+        <div class="menu-button-box">
+          <button class="menu-button" active onclick="window.location.href='index.html';">
+            <img src="icons/home.png">
+            POČETNA
+          </button>
+        </div>
+        <div class="menu-button-box">
+          <button class="menu-button" onclick="window.location.href='catalog-dekoracije.html';">
+            <img src="icons/dekoracije.png">
+            DEKORACIJE
+          </button>
+      </div>
+        <div class="menu-button-box">
+          <button class="menu-button" onclick="window.location.href='catalog-baloni.html';">
+            <img src="icons/baloni.png">
+            BALONI
+          </button>
+      </div>
+      <div class="menu-button-box education-icon">
+          <button class="menu-button menu-button-education" onclick="window.location.href='catalog-pokloni.html';">
+            <img src="icons/pokloni.png">
+            POKLONI
+          </button>
+        </div>
+        <div class="menu-button-box">
+          <button class="menu-button" onclick="window.location.href='catalog-cvece.html';">
+            <img src="icons/cvece.png">
+            CVEĆE
+          </button>
+        </div>
+        <div class="menu-button-box" onclick="window.location.href='support.html';">
+          <button class="menu-button">
+            <img src="icons/isporuka.png">
+            ISPORUKA
+          </button>
+        </div>
+        <div class="menu-button-box">
+            <button class="menu-button" onclick="window.location.href='order-pretraga.html';">
+                <img src="icons/orders.png">
+                <span>PORUDŽBINE</span>
+            </button>
+        </div>
+      </div>
+      <div class="cart">
+        <button class="cart-button" onclick="window.location.href='cart.html'">
+          <img src="icons/cart-2.png">
+          <span class="cart-badge">0</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- MAIN -->
+
+    <main class="orders-page">
+
+        <section class="orders-hero">
+
+            <h1>Moje porudžbine</h1>
+
+            <p>
+
+                Unesite broj telefona koji ste koristili prilikom naručivanja.
+
+            </p>
+
+        </section>
+
+
+        <!-- SEARCH -->
+
+        <section class="orders-search">
+
+            <div class="orders-search-box">
+
+                <input
+                    type="tel"
+                    placeholder="+381 XX XXX XXXX">
+
+                <button>
+
+                    Pretraži
+
+                </button>
+
+            </div>
+
+            <p class="orders-search-info">
+
+                Vaš broj telefona koristi se samo za pronalaženje vaših porudžbina.
+
+            </p>
+
+        </section>
+
+
+        <!-- EMPTY -->
+
+        <section class="orders-empty">
+
+            <div class="orders-empty-icon">
+
+                📭
+
+            </div>
+
+            <h2>Nema pronađenih porudžbina</h2>
+
+            <p>
+
+                Proverite da li ste uneli ispravan broj telefona.
+
+            </p>
+
+        </section>
+
+
+        <!-- LIST -->
+
+        <section class="orders-list">
+
+            <article class="order-card">
+
+                <div class="order-header">
+
+                    <div>
+
+                        <h3>Porudžbina #1048</h3>
+
+                        <span>05.08.2026.</span>
+
+                    </div>
+
+                    <div class="order-status preparing">
+
+                        U pripremi
+
+                    </div>
+
+                </div>
+
+                <div class="order-summary">
+
+                    <div>
+
+                        <small>Proizvoda</small>
+
+                        <strong>3</strong>
+
+                    </div>
+
+                    <div>
+
+                        <small>Ukupno</small>
+
+                        <strong>8.450 RSD</strong>
+
+                    </div>
+
+                </div>
+
+                <button class="details-button">
+
+                    Pogledaj detalje
+
+                </button>
+
+            </article>
+
+
+
+            <article class="order-card">
+
+                <div class="order-header">
+
+                    <div>
+
+                        <h3>Porudžbina #1042</h3>
+
+                        <span>29.07.2026.</span>
+
+                    </div>
+
+                    <div class="order-status delivered">
+
+                        Isporučeno
+
+                    </div>
+
+                </div>
+
+                <div class="order-summary">
+
+                    <div>
+
+                        <small>Proizvoda</small>
+
+                        <strong>5</strong>
+
+                    </div>
+
+                    <div>
+
+                        <small>Ukupno</small>
+
+                        <strong>14.250 RSD</strong>
+
+                    </div>
+
+                </div>
+
+                <button class="details-button">
+
+                    Pogledaj detalje
+
+                </button>
+
+            </article>
+
+        </section>
+
+
+        <!-- DETAILS -->
+
+        <section class="order-details">
+
+            <div class="details-header">
+
+                <h2>
+
+                    Porudžbina #1048
+
+                </h2>
+
+                <div class="order-status preparing">
+
+                    U pripremi
+
+                </div>
+
+            </div>
+
+            <div class="details-info">
+
+                <div>
+
+                    <span>Datum</span>
+
+                    <strong>05.08.2026.</strong>
+
+                </div>
+
+                <div>
+
+                    <span>Telefon</span>
+
+                    <strong>+381 60 123 4567</strong>
+
+                </div>
+
+                <div>
+
+                    <span>Adresa</span>
+
+                    <strong>
+
+                        Bulevar Oslobođenja 25,
+                        Novi Sad
+
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="products-title">
+
+                <h3>Proizvodi</h3>
+
+            </div>
+
+            <div class="order-products">
+
+                <div class="order-product">
+
+                    <div>
+
+                        <h4>Latex baloni 30 cm</h4>
+
+                        <span>Količina: 100</span>
+
+                    </div>
+
+                    <strong>2.500 RSD</strong>
+
+                </div>
+
+                <div class="order-product">
+
+                    <div>
+
+                        <h4>Helijum</h4>
+
+                        <span>Količina: 1</span>
+
+                    </div>
+
+                    <strong>4.000 RSD</strong>
+
+                </div>
+
+                <div class="order-product">
+
+                    <div>
+
+                        <h4>Traka za balone</h4>
+
+                        <span>Količina: 2</span>
+
+                    </div>
+
+                    <strong>1.950 RSD</strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="details-total">
+
+                <span>Ukupno</span>
+
+                <strong>8.450 RSD</strong>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer class="footer">
+    
+      <!-- TOP -->
+      <div class="footer-top">
+    
+        <!-- Brand -->
+        <div class="footer-brand">
+            <span class="footer-logo-word">GENBALLOON LTD</span>
+          </a>
+          <p>Step-by-step balloon tutorials and digital courses for decorators of all levels.</p>
+    
+          <!-- Social -->
+          <div class="social-row">
+            <a href="#" class="social-btn" aria-label="TikTok">
+              <svg viewBox="0 0 24 24" width="18" height="18">
+                <path fill="currentColor"
+                  d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.2 8.2 0 0 0 4.79 1.52V6.76a4.85 4.85 0 0 1-1.02-.07z" />
+              </svg>
+            </a>
+            <a href="#" class="social-btn" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                <circle cx="12" cy="12" r="4" />
+                <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none" />
+              </svg>
+            </a>
+            <a href="#" class="social-btn" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" width="18" height="18">
+                <path fill="currentColor" d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+              </svg>
+            </a>
+            <a href="#" class="social-btn" aria-label="YouTube">
+              <svg viewBox="0 0 24 24" width="18" height="18">
+                <path fill="currentColor"
+                  d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z" />
+                <polygon fill="#fff" points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" />
+              </svg>
+            </a>
+          </div>
+    
+        </div>
+    
+        <!-- Services -->
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="#">Courses</a></li>
+            <li><a href="#">Digital goods</a></li>
+            <li><a href="#">Merch <span class="badge-new">new</span></a></li>
+            <li><a href="#">Subscription</a></li>
+          </ul>
+        </div>
+    
+        <!-- Company -->
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#">About us</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Affiliates</a></li>
+            <li><a href="#">Press</a></li>
+          </ul>
+        </div>
+    
+        <!-- Support -->
+        <div class="footer-col">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Shipping & delivery</a></li>
+            <li><a href="#">Returns</a></li>
+          </ul>
+        </div>
+    
+      </div><!-- /footer-top -->
+    
+      <!-- TRUST BAR -->
+      <div class="footer-trust">
+        <span class="trust-label">Why shop with us</span>
+        <div class="trust-pills">
+          <div class="trust-pill">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            </svg>
+            Secure checkout
+          </div>
+          <div class="trust-pill">
+            <svg viewBox="0 0 24 24">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+            Instant digital access
+          </div>
+          <div class="trust-pill">
+            <svg viewBox="0 0 24 24">
+              <polyline points="20 12 20 22 4 22 4 12" />
+              <rect x="2" y="7" width="20" height="5" />
+              <path d="M12 22V7" />
+              <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z" />
+              <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z" />
+            </svg>
+            Free gift included
+          </div>
+          <div class="trust-pill">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.29h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.92z" />
+            </svg>
+            Friendly support
+          </div>
+        </div>
+      </div>
+    
+      <!-- BOTTOM -->
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2026 Genballoon Ltd. All rights reserved.</span>
+        <nav class="footer-legal" aria-label="Legal links">
+          <a href="#">Privacy policy</a>
+          <a href="#">Terms of use</a>
+          <a href="#">Cookie settings</a>
+        </nav>
+      </div>
+    
+    </footer>
+
+    <script src="js/order-pretraga.js"></script>
+
+</body>
+
+</html>
