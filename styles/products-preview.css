@@ -480,3 +480,28 @@
 }
 
 }
+
+/* ==========================================
+   MOBILE - DISABLE HOVER EFFECTS
+========================================== */
+
+@media (hover: none), (max-width: 900px){
+
+    .home-product-card:hover{
+
+        transform:none;
+        border-color:rgb(205,205,211);
+        box-shadow:none;
+
+    }
+
+    .home-more-card:hover{
+
+        transform:none;
+        border-color:rgb(205,205,211);
+        background:#fafafa;
+        box-shadow:none;
+
+    }
+
+}
