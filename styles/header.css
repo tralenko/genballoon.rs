@@ -130,6 +130,11 @@ header{
     color:rgb(0, 0, 0);
 }
 
+
+.logo-txt {
+  margin-top: 1px;
+}
+
 .confetti {
   position: fixed;
   width: 10px;
@@ -400,76 +405,29 @@ header{
 
 @media (max-width:900px){
 
-    .header-burger-btn{
-        display:block;
-        width:48px;
-        flex-shrink:0;
-    }
-
-    .logo{
-
-        width:auto;
-
-        display:flex;
-        justify-content:center;
-        align-items:center;
-
-        flex-shrink:1;
-
-    }
-
-    .logo-txt{
-
-        overflow:hidden;
-
-    }
-
-    .logo-txt p{
-
-        margin:0;
-        font-size:22px;
-        font-weight:500;
-        line-height:1;
-
-        white-space:nowrap;
-
-    }
-
     .cart{
 
-    width:48px;
+        width:100px;
 
-    display:flex;
-    justify-content:center;
-    align-items:center;
+        justify-content:flex-end;
 
-    padding:0;
+        padding-right:20px; /* правее */
 
-    flex-shrink:0;
+    }
 
-}
+    .cart-button{
 
-  .cart-button{
-
-    width:40px;
-    height:40px;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    padding:0;
-    margin:0;
-
-}
+        gap:8px;
+    }
 
     .cart-button img{
+
         height:20px;
     }
 
     .cart-badge{
-        font-size:20px;
+
+        font-size:22px;
     }
 
 }
-
