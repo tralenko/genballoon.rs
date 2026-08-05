@@ -400,43 +400,67 @@ header{
 
 @media (max-width:900px){
 
-  .logo-txt p{
-    margin:0;
+    .logo{
 
-    font-size:18px;
-    font-weight:700;
-    line-height:1;
+        width:auto;
+        flex:1;
 
-    white-space:nowrap;
-}
+        justify-content:center;
 
-.logo-txt span{
-    color:rgb(0, 0, 0);
-}
+        min-width:0;
+
+    }
+
+    .logo-txt{
+
+        overflow:hidden;
+
+    }
+
+    .logo-txt p{
+
+        margin:0;
+
+        font-size:15px;
+        font-weight:700;
+        line-height:1;
+
+        white-space:nowrap;
+
+    }
+
+    .logo-txt span{
+
+        color:#000;
+
+    }
 
     .cart{
 
-        width:100px;
+        width:70px;
 
         justify-content:flex-end;
 
-        padding-right:20px; /* правее */
+        padding-right:8px;
 
     }
 
     .cart-button{
 
         gap:8px;
+
     }
 
     .cart-button img{
 
         height:20px;
+
     }
 
     .cart-badge{
 
-        font-size:22px;
+        font-size:20px;
+
     }
 
 }
