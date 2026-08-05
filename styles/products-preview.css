@@ -1,126 +1,80 @@
 document.addEventListener("DOMContentLoaded", async () => {
 
+    const rows = document.querySelectorAll(".home-products-row");
 
-const rows = document.querySelectorAll(".home-products-row");
+    if (!rows.length) return;
 
+    function getProductsLimit() {
 
-if(!rows.length) return;
+        const width = window.innerWidth;
 
+        if (width <= 900) {
+            return 2;
+        }
 
+        return Math.max(
+            5,
+            Math.floor((width * 0.93) / 202)
+        );
 
-
-function getProductsLimit(){
-
-    const width = window.innerWidth;
-
-    if(width <= 500){
-        return 2;
     }
-
-    if(width <= 900){
-        return 3;
-    }
-
-    return Math.max(
-        5,
-        Math.floor((width * 0.93) / 202)
-    );
-
-}
-
-
-
-
-
-for(const row of rows){
-
-
-    const category = row.dataset.category;
-
-    const catalogLinks = {
-        baloni: "catalog-baloni.html",
-        pokloni: "catalog-pokloni.html",
-        cvece: "catalog-cvece.html"
-    };
 
     const limit = getProductsLimit();
 
+    // Загружаем все категории одновременно
+    const requests = [...rows].map(row => {
 
+        const category = row.dataset.category;
 
+        return window.supabaseClient
+            .from("products_rs")
+            .select("*")
+            .eq("active", true)
+            .eq("category", category)
+            .limit(limit);
 
-    const {data,error} = await window.supabaseClient
+    });
 
+    const results = await Promise.all(requests);
 
-        .from("products_rs")
+    rows.forEach((row, index) => {
 
+        const { data, error } = results[index];
 
-        .select("*")
+        if (error) {
+            console.error(error);
+            return;
+        }
 
+        row.innerHTML = "";
 
-        .eq("active",true)
+        data.forEach(product => {
 
+            const card = document.createElement("div");
 
-        .eq("category",category)
+            card.className = "home-product-card";
 
+            card.dataset.id = product.id;
 
-        .limit(limit);
+            card.innerHTML = `
 
+            <div class="home-product-image">
 
+                <img loading="lazy"
+                     src="${product.image_url || "icons/no-image.png"}">
 
+            </div>
 
+            <div class="home-product-name">
 
-    if(error){
+                ${product.title_sr}
 
-        console.error(error);
+            </div>
 
-        continue;
-
-    }
-
-
-
-
-
-    row.innerHTML="";
-
-
-
-
-
-    data.forEach(product=>{
-
-
-        const card=document.createElement("div");
-
-
-        card.className="home-product-card";
-
-
-        card.dataset.id=product.id;
-
-
-
-        card.innerHTML=`
-
-        <div class="home-product-image">
-
-            <img src="${product.image_url || 'icons/no-image.png'}">
-
-        </div>
-
-
-        <div class="home-product-name">
-
-            ${product.title_sr}
-
-        </div>
-
-
-
-        <button
+            <button
                 class="home-product-buy add-to-cart-btn"
                 data-id="${product.id}"
-                data-title="${product.title}"
+                data-title="${product.title_sr}"
                 data-price="${product.price}"
                 data-image="${product.image_url || ""}">
 
@@ -148,77 +102,77 @@ for(const row of rows){
 
             </button>
 
+            <div class="home-product-price">
 
+                <span class="price-number">
 
-        <div class="home-product-price">
+                    ${product.price}
 
-            <span class="price-number">
+                </span>
 
-                ${product.price}
+                <span class="price-currency">
 
-            </span>
+                    din
 
+                </span>
 
-            <span class="price-currency">
+            </div>
 
-                din
+            `;
 
-            </span>
+            row.appendChild(card);
 
+        });
 
-        </div>
+        // Ссылка зависит от категории
+        let catalogLink = "product-catalog.html";
+
+        switch (row.dataset.category) {
+
+            case "baloni":
+                catalogLink = "product-catalog.html?category=baloni";
+                break;
+
+            case "pokloni":
+                catalogLink = "product-catalog.html?category=pokloni";
+                break;
+
+            case "cvece":
+                catalogLink = "product-catalog.html?category=cvece";
+                break;
+
+        }
+
+        const more = document.createElement("a");
+
+        more.href = catalogLink;
+
+        more.className = "home-more-card";
+
+        more.innerHTML = `
+
+            <div class="home-more-icon">
+
+                →
+
+            </div>
+
+            <div class="home-more-title">
+
+                Pogledajte sve
+
+            </div>
+
+            <div class="home-more-text">
+
+                Svi proizvodi iz kategorije
+
+            </div>
 
         `;
 
-
-        row.appendChild(card);
-
+        row.appendChild(more);
 
     });
-
-
-
-
-
-    const more=document.createElement("a");
-
-
-    more.href = catalogLinks[category] || "product-catalog.html";
-
-
-    more.className="home-more-card";
-
-
-    more.innerHTML=`
-
-        <div class="home-more-icon">
-
-            →
-
-        </div>
-
-
-        <div class="home-more-title">
-
-            Pogledajte sve
-
-        </div>
-
-
-        <div class="home-more-text">
-
-            Svi proizvodi iz kataloga
-
-        </div>
-
-    `;
-
-
-    row.appendChild(more);
-
-
-}
-
-
 
 });
