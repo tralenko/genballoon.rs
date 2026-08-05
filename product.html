@@ -21,7 +21,7 @@
 
     <script defer src="js/header.js"></script>
     <script src="js/cart.js"></script>
-    <script src="js/product.js" defer></script>
+    <script src="js/product-page.js" defer></script>
 
     <style>
     /* =========================
@@ -538,7 +538,7 @@
       <div class="logo" id="logo">
         <div>
           <div class="logo-txt">
-            <p><span>GEN</span>BALLOON</p>
+            <p><span>Proslava </span>Majstor</p>
           </div>
         </div>
       </div>
@@ -550,7 +550,7 @@
           </button>
         </div>
         <div class="menu-button-box">
-          <button class="menu-button" onclick="window.location.href='catalog-dekoracije.html';">
+          <button class="menu-button" onclick="window.location.href='decorations.html';">
             <img src="icons/dekoracije.png">
             DEKORACIJE
           </button>
@@ -580,9 +580,9 @@
           </button>
         </div>
         <div class="menu-button-box">
-            <button class="menu-button" id="auth-menu-button">
-                <img id="auth-menu-icon" src="icons/log in.png">
-                <span id="auth-menu-text">LOG IN</span>
+            <button class="menu-button" onclick="window.location.href='order-pretraga.html';">
+                <img src="icons/orders.png">
+                <span>PORUDŽBINE</span>
             </button>
         </div>
       </div>
@@ -595,7 +595,9 @@
     </header>
 
     <nav class="product-breadcrumb">
-      <a href="product-catalog.html">← Shop</a>
+      <a href="#" onclick="goBackCatalog(); return false;">
+    ← Shop
+</a>
       <span class="sep">/</span>
       <span class="current" id="breadcrumb-title">Loading…</span>
     </nav>
@@ -801,6 +803,24 @@
       </div>
 
     </footer>
+
+    <script>
+
+function goBackCatalog(){
+
+    if(document.referrer){
+
+        history.back();
+
+    }else{
+
+        window.location.href = "index.html";
+
+    }
+
+}
+
+</script>
 
   </body>
 </html>
