@@ -1,6 +1,7 @@
 .catalog-section{
     width:93%;
     min-height:100vh;
+    max-width: 1500px;
 
     margin:0 auto;
     margin-top:118px; /* 78px header + 40px отступ */
@@ -382,7 +383,7 @@
     .catalog-header{
         margin-bottom:20px;
         position:sticky;
-        top:60px;
+        top:78px;
         margin-right:calc(50% - 48vw);
 
         z-index:100;
@@ -580,5 +581,3 @@
     }
 
 }
-
-
