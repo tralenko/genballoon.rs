@@ -13,7 +13,7 @@
 .cat-list-title{
     font-size:28px;
     font-weight:700;
-    margin:0 0 8px; /* было 20px — уменьшил отступ до карточек */
+    margin:0 0 20px;
     color:#111;
 }
 
@@ -25,13 +25,13 @@
 
 .cat-list-section-wrap{
     width:93%;
-    margin:95px auto 0;
+    margin:95px auto 25px;
 }
 
 .cat-list-title{
-    font-size:22px;
-    margin-bottom:6px;
-    text-align:center; /* заголовок по центру только на мобиле */
+    font-size:26px;
+    margin-bottom:20px;
+    text-align:center;
 }
 
 .cat-list-section{
@@ -41,10 +41,6 @@
 }
 
 .cat-list-section{
-    width:93%;
-    max-width:1500px;
-    margin:40px auto 40px;
-
     display:flex;
     flex-wrap:wrap;
     gap:22px;
@@ -110,8 +106,6 @@
 @media(max-width:900px){
 
 .cat-list-section{
-    width:95%;
-    margin:20px auto 25px;
     flex-direction:column;
     gap:16px;
 }
@@ -129,4 +123,3 @@
 }
 
 }
-
