@@ -11,22 +11,20 @@ if(!rows.length) return;
 
 function getProductsLimit(){
 
-
     const width = window.innerWidth;
 
-
-    if(width <= 900){
-
-        return 5;
-
+    if(width <= 500){
+        return 2;
     }
 
+    if(width <= 900){
+        return 3;
+    }
 
     return Math.max(
         5,
         Math.floor((width * 0.93) / 202)
     );
-
 
 }
 
