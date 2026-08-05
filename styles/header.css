@@ -400,14 +400,21 @@ header{
 
 @media (max-width:900px){
 
+    .header-burger-btn{
+        display:block;
+        width:48px;
+        flex-shrink:0;
+    }
+
     .logo{
 
         width:auto;
-        flex:1;
 
+        display:flex;
         justify-content:center;
+        align-items:center;
 
-        min-width:0;
+        flex-shrink:1;
 
     }
 
@@ -420,8 +427,7 @@ header{
     .logo-txt p{
 
         margin:0;
-
-        font-size:18px;
+        font-size:16px;
         font-weight:700;
         line-height:1;
 
@@ -429,38 +435,25 @@ header{
 
     }
 
-    .logo-txt span{
-
-        color:#000;
-
-    }
-
     .cart{
 
-        width:70px;
-
+        width:48px;
+        display:flex;
         justify-content:flex-end;
+        align-items:center;
 
-        padding-right:8px;
+        padding-right:0;
 
-    }
-
-    .cart-button{
-
-        gap:8px;
+        flex-shrink:0;
 
     }
 
     .cart-button img{
-
         height:20px;
-
     }
 
     .cart-badge{
-
         font-size:20px;
-
     }
 
 }
