@@ -1,8 +1,24 @@
 document.addEventListener("DOMContentLoaded", function() {
-  document.getElementById("burger").addEventListener("click", function() {
-    document.querySelector("header").classList.toggle("open")
-  })
-})
+
+  const burger = document.getElementById("burger");
+  const header = document.querySelector("header");
+
+  if(burger && header){
+
+    burger.addEventListener("click", function() {
+
+      header.classList.toggle("open");
+
+      // состояние открытого меню
+      document.body.classList.toggle("menu-open");
+
+    });
+
+  }
+
+
+});
+
 
 // ===============================
 // MOBILE AUTO HIDE HEADER
@@ -14,18 +30,37 @@ if (window.innerWidth <= 900 && header) {
 
     let lastScroll = 0;
 
+
     window.addEventListener("scroll", () => {
 
+
+        // если меню открыто — header всегда виден
+        if(document.body.classList.contains("menu-open")){
+
+            header.classList.remove("header-hidden");
+
+            return;
+
+        }
+
+
+
         const currentScroll = window.pageYOffset;
+
+
 
         // верх страницы
         if (currentScroll <= 10) {
 
             header.classList.remove("header-hidden");
+
             lastScroll = currentScroll;
+
             return;
 
         }
+
+
 
         // скролл вниз
         if (currentScroll > lastScroll) {
@@ -34,6 +69,8 @@ if (window.innerWidth <= 900 && header) {
 
         }
 
+
+
         // скролл вверх
         else {
 
@@ -41,7 +78,10 @@ if (window.innerWidth <= 900 && header) {
 
         }
 
+
+
         lastScroll = currentScroll;
+
 
     });
 
