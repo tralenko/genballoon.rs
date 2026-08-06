@@ -381,16 +381,20 @@
 @media (max-width:500px){
 
     .catalog-header{
+        margin-top:84px; 
+
         margin-bottom:20px;
-        position:sticky;
-        top:78px;
-        margin-right:calc(50% - 48vw);
 
-        z-index:100;
+        position:static;
 
-        padding-bottom:12px;
+        margin-right:0;
+
+        z-index:auto;
+
+        padding-bottom:0;
 
         background:transparent;
+
     }
 
 
@@ -406,6 +410,7 @@
         display:flex;
         flex-direction:column;
         gap:0;
+        width:95%;
 
         background:#fff;
 
@@ -581,3 +586,4 @@
     }
 
 }
+
